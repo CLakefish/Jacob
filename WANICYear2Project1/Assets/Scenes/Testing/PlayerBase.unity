@@ -429,10 +429,10 @@ MonoBehaviour:
     m_Bits: 1
   c: {fileID: 2098276572}
   moveSpeed: 8
-  groundSpeedInput: 0.04
-  groundSpeedNoInput: 0.08
-  airSpeedInput: 0.08
-  airSpeedNoInput: 0.12
+  groundAcceleration: 0.1
+  groundDeceleration: 0.1
+  airAcceleration: 0.1
+  airDeceleration: 0.1
   jumpForce: 12
   jumpStartBoost: 1
   jumpCancelSpeed: 0.12
