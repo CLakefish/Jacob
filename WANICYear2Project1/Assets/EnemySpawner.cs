@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
     public int EnemiesPerSpawn;
 
     public float SpawnRate;
-    public int MaxSpawnRate;
+    public float MaxSpawnRate;
 
     public float DifficultyRate;
     // Start is called before the first frame update
@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            SpawnRate = SpawnRate - 1 * Time.deltaTime - DifficultyRate;
+            SpawnRate = SpawnRate - 1 * Time.deltaTime;
         }
 
 
@@ -46,9 +46,10 @@ public class EnemySpawner : MonoBehaviour
 
     private void IncreaseDifficulty()
     {
-        if (DifficultyRate > 4) //makes certain that no matter what the gmae will only take away atleast 4 seconds from the spawn rate. set ACTUAL spawn rate to be greater than 8.
+        if (DifficultyRate < 4) //makes certain that no matter what the gmae will only take away atleast 4 seconds from the spawn rate. set ACTUAL spawn rate to be greater than 8.
         {
             DifficultyRate = DifficultyRate += 0.5f;
+            MaxSpawnRate -= 0.5f;
         }
         EnemiesPerSpawn++;
     }
