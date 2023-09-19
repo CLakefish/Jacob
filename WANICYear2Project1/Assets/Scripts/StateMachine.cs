@@ -2,9 +2,7 @@
  * 
  * Name        : Carson Lakefish
  * Date        : 9 / 14 / 2023
- * 
  * Description : Main State Machine
- * 
  111111111111111111111111111111111111111111111111111111111*/
 
 using System.Collections;
@@ -13,6 +11,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
+    public bool Debug = false;
     internal State currentState = null;
     internal State previousState = null;
     internal float stateDuration = 0;
@@ -46,6 +45,8 @@ public class StateMachine : MonoBehaviour
 
     private void OnGUI()
     {
+        if (!Debug) return;
+
         GUILayout.BeginArea(new Rect(10, 10, 200, 200));
 
         string current  = "Current State : " + $"<color='red'>{(currentState == null ? "None" : currentState)}</color>",
