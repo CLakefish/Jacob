@@ -428,18 +428,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   c: {fileID: 2098276572}
-  moveSpeed: 8
+  moveSpeed: 10
   groundAcceleration: 0.1
   groundDeceleration: 0.1
   airAcceleration: 0.1
   airDeceleration: 0.1
-  jumpForce: 12
+  jumpForce: 16
   jumpStartBoost: 1
-  jumpCancelSpeed: 0.12
+  jumpCancelSpeed: 0.08
   jumpBuffer: 0.1
   coyoteTime: 0.1
-  jumpApexBoost: 0.4
-  jumpApexVerticalBoost: 0.2
+  jumpApexBoost: 0.2
+  jumpApexVerticalBoost: -0.1
   jumpApexThreshold: {x: -14, y: 14}
   constantGravity: -0.58
 --- !u!1 &2098276570
