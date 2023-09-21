@@ -43,11 +43,6 @@ public class Health : MonoBehaviour
                 }
                 if (destroyAtZero) 
                 {
-                    deathEffects = GetComponent<DeathEffects>();
-                    if (deathEffects != null)
-                    {
-                        deathEffects.deathEvent.Invoke();
-                    }
                     Destroy(gameObject);
                 }
             }
