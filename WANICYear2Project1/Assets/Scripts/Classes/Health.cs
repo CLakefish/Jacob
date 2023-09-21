@@ -1,17 +1,48 @@
 /*
- * zak baydass
- * 10/28/2022
- * ths script doesnt get used, health system was reworked.
+ * zak baydass and Carson Lakefish
+ * 9/20/2023
+ * Health Base
  */
 
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Health : MonoBehaviour
+public abstract class Health : MonoBehaviour
 {
+    [Header("Health Parameters")]
+    [SerializeField] protected int currentHealth;
+    [SerializeField] protected int maxHealth;
+    [SerializeField] private bool destroyAtZero;
+
+
+    public void Hit(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+
+            if (destroyAtZero) {
+                Destroy(gameObject);
+                return;
+            }
+
+            OnDeath();
+
+            return;
+        }
+
+        OnHit();
+    }
+
+    protected abstract void OnDeath();
+    protected abstract void OnHit();
+
+    // Previous Code
+    /*
     [SerializeField]
         [Min(0)]
     public float currentHealth = 3;
@@ -46,5 +77,5 @@ public class Health : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
-        }
+        }*/
 }
