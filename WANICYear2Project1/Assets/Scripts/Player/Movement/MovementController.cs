@@ -143,7 +143,7 @@ public class Walking : PlayerState
         if (Player.Grounded)
         {
             if (Input.GetKeyDown(KeyCode.Space) || Player.jumpB > 0) {
-                Debug.Log("o");
+                // Debug.Log("o");
                 Player.ChangeState(Player.Jumping);
                 return;
             }
