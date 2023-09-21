@@ -10,8 +10,38 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Health : MonoBehaviour
+public abstract class Health : MonoBehaviour
 {
+    [Header("Health Parameters")]
+    [SerializeField] internal int currentHealth;
+    [SerializeField] internal int maxHealth;
+    [SerializeField] private bool destroyAtZero;
+
+    public void Hit(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+
+            if (destroyAtZero) {
+                Destroy(gameObject);
+                return;
+            }
+
+            OnDeath();
+            return;
+        }
+
+        OnHit();
+    }
+
+    protected abstract void OnDeath();
+    protected abstract void OnHit();
+
+    // Previous Code
+    /*
     [SerializeField]
         [Min(0)]
     public float currentHealth = 3;
@@ -46,5 +76,5 @@ public class Health : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
-        }
+        }*/
 }
