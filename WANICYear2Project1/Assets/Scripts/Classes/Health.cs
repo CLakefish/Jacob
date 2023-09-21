@@ -1,21 +1,21 @@
 /*
- * zak baydass
- * 10/28/2022
- * ths script doesnt get used, health system was reworked.
+ * zak baydass and Carson Lakefish
+ * 9/20/2023
+ * Health Base
  */
 
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
-using UnityEngine.UI;
 
 public abstract class Health : MonoBehaviour
 {
     [Header("Health Parameters")]
-    [SerializeField] internal int currentHealth;
-    [SerializeField] internal int maxHealth;
+    [SerializeField] protected int currentHealth;
+    [SerializeField] protected int maxHealth;
     [SerializeField] private bool destroyAtZero;
+
 
     public void Hit(int damage)
     {
@@ -31,6 +31,7 @@ public abstract class Health : MonoBehaviour
             }
 
             OnDeath();
+
             return;
         }
 
