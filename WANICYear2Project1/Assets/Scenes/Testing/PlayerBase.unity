@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 1069264038}
   - component: {fileID: 1069264041}
   - component: {fileID: 1069264042}
+  - component: {fileID: 1069264043}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -429,6 +430,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1025
   c: {fileID: 2098276572}
+  visual: {fileID: 1069264039}
   moveSpeed: 10
   groundAcceleration: 0.1
   groundDeceleration: 0.1
@@ -443,6 +445,22 @@ MonoBehaviour:
   jumpApexVerticalBoost: -0.1
   jumpApexThreshold: {x: -14, y: 14}
   constantGravity: -0.58
+--- !u!114 &1069264043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069264037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4136263590f6d764195817fbc170803b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 3
+  maxHealth: 3
+  destroyAtZero: 0
+  HealthBar: {fileID: 0}
 --- !u!1 &2098276570
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,10 +606,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 649196266448161208, guid: 1033edf0807dc4b45ba4e017f8c950d8, type: 3}
-      propertyPath: Debug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2991041928078650285, guid: 1033edf0807dc4b45ba4e017f8c950d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.47

@@ -16,22 +16,22 @@ public class PlayerHealth : Health
     // When the player dies
     protected override void OnDeath()
     {
-        Destroy(gameObject);
-        HealthBar.value = 0;
-        HealthBar.fillRect.gameObject.SetActive(false);
+        //Destroy(gameObject);
+        //HealthBar.value = 0;
+        //HealthBar.fillRect.gameObject.SetActive(false);
     }
 
     // When the player is hit
     protected override void OnHit()
     {
-        HealthBar.value = currentHealth;
+        //HealthBar.value = currentHealth;
     }
 
 
     private void Start()
     {
-        HealthBar.maxValue = maxHealth;
-        HealthBar.fillRect.gameObject.SetActive(true);
+        //HealthBar.maxValue = maxHealth;
+        //HealthBar.fillRect.gameObject.SetActive(true);
     }
 
     private void Update()

@@ -31,6 +31,9 @@ public class Basic : StateMachine
     [Header("Collisions")]
     public LayerMask layers;
 
+    [Header("Attack Layers")]
+    public LayerMask attackLayer;
+
     [Header("Fall Parameters")]
     [SerializeField] private float constantGravity;
 
@@ -117,16 +120,19 @@ public class Searching : BaseEnemyState
     private void Jump()
     {
         Enemy.rb.velocity = new Vector2(Enemy.rb.velocity.x, 0);
-        Enemy.rb.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
+        Enemy.rb.AddForce(Vector2.up * 14, ForceMode2D.Impulse);
     }
 }
 
 public class Attacking : BaseEnemyState
 {
+    private bool hasHit = false;
+
     public Attacking(Basic enemy) : base(enemy) { }
 
     public override void Enter()
     {
+        hasHit = false;
         Enemy.rb.velocity = new Vector2(0, Enemy.rb.velocity.y);
     }
 
@@ -138,15 +144,24 @@ public class Attacking : BaseEnemyState
             return;
         }
 
-        if (Time.time > Enemy.previousAttackTime + Enemy.swingTime)
+        if (Time.time > Enemy.previousAttackTime + Enemy.swingTime && !hasHit)
         {
-            // Cast for player
+            Debug.Log("o");
+            RaycastHit2D player = Physics2D.BoxCast(Enemy.transform.position, Vector3.one * 1.1f, 0, new Vector2(Mathf.Sign(Enemy.player.transform.position.x - Enemy.rb.transform.position.x), 0), 1.8f, Enemy.attackLayer);
+
+            if (player.collider != null)
+            {
+                hasHit = true;
+                player.collider.GetComponent<PlayerHealth>().Hit(Enemy.attackDamage);
+            }
+
             return;
         }
     }
 
     public override void Exit()
     {
+        hasHit = false;
         Enemy.previousAttackTime = Time.time;
     }
 }

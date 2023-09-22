@@ -23,6 +23,7 @@ public class MovementController : StateMachine
     [Header("References")]
     public static MovementController Instance;
     [SerializeField] private Camera c;
+    [SerializeField] private SpriteRenderer visual;
     internal Rigidbody2D rb;
     private SpriteRenderer sprite;
 
@@ -79,7 +80,7 @@ public class MovementController : StateMachine
     new void Update()
     {
         // Improve Camera Behaviour
-        //c.transform.position = Vector3.SmoothDamp(c.transform.position, new Vector3(rb.transform.position.x, rb.transform.position.y + 1, -10), ref camVelocity, 0.1f);
+        c.transform.position = Vector3.SmoothDamp(c.transform.position, new Vector3(rb.transform.position.x, rb.transform.position.y + 0.6f, -10), ref camVelocity, 0.068f);
 
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         inputting = input != new Vector2(0, 0);
@@ -91,6 +92,8 @@ public class MovementController : StateMachine
         Vector2 moveDir = new Vector2(input.x * moveSpeed, rb.velocity.y);
 
         rb.velocity = Vector2.SmoothDamp(rb.velocity, moveDir, ref currentVelocity, velocityChange);
+
+        visual.flipX = rb.velocity.x != 0 && Mathf.Sign(rb.velocity.x) == -1;
 
         base.Update();
     }
