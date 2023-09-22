@@ -8,8 +8,8 @@ public class EnemySpawner : MonoBehaviour
     public GameObject Player;
     public GameObject EnemyPrefab;
 
-    public int SpawnDistance;
-    public int MaxSpawnDistance;
+    public Vector2 LeftSpawnPoint;
+    public Vector2 RightSpawnPoint;
 
     public int EnemiesPerSpawn;
 
@@ -55,8 +55,8 @@ public class EnemySpawner : MonoBehaviour
     }
     private void SpawnEnemy()
     {
-        Instantiate(EnemyPrefab, new Vector3(Player.transform.position.x - Random.Range(SpawnDistance, MaxSpawnDistance), 0, 0), Quaternion.identity);
-        Instantiate(EnemyPrefab, new Vector3(Player.transform.position.x + Random.Range(SpawnDistance, MaxSpawnDistance), 0, 0), Quaternion.identity);
+        Instantiate(EnemyPrefab, LeftSpawnPoint, Quaternion.identity);
+        Instantiate(EnemyPrefab,RightSpawnPoint, Quaternion.identity);
 
         Debug.Log("enemySpawned!");
     }
