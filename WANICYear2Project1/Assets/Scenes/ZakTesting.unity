@@ -1283,12 +1283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe03b160be9bb848a7b31cbbef10de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 824112536}
   EnemyPrefab: {fileID: 7643072773071781041, guid: 1033edf0807dc4b45ba4e017f8c950d8, type: 3}
-  LeftSpawnPoint: {x: 0, y: 0, z: 0}
+  LeftSpawnPoint: {x: 0, y: 0}
   RightSpawnPoint: {x: 0, y: 0}
   EnemiesPerSpawn: 1
-  SpawnRate: 3
   MaxSpawnRate: 7
   DifficultyRate: 1
 --- !u!114 &824112538
@@ -1308,6 +1306,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   c: {fileID: 788038589}
+  visual: {fileID: 0}
   moveSpeed: 8
   groundAcceleration: 0.1
   groundDeceleration: 0.1
@@ -1475,7 +1474,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 3
   maxHealth: 3
-  destroyAtZero: 0
+  hasInvulnerability: 0
+  invulnerabilityTime: 0
   HealthBar: {fileID: 1722637479}
 --- !u!114 &824112544
 MonoBehaviour:
@@ -1584,7 +1584,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &875684400
 RectTransform:
   m_ObjectHideFlags: 0
