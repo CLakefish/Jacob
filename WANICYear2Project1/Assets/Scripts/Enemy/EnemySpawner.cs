@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
 
-    public GameObject Player;
     public GameObject EnemyPrefab;
 
     public Vector2 LeftSpawnPoint;
@@ -13,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
 
     public int EnemiesPerSpawn;
 
-    public float SpawnRate;
+    private float SpawnRate;
     public float MaxSpawnRate;
 
     public float DifficultyRate;
