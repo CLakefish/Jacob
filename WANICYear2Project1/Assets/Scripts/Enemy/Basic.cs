@@ -92,7 +92,7 @@ public class Searching : BaseEnemyState
             Vector3 moveDir = Enemy.player.transform.position - Enemy.rb.transform.position;
             Enemy.rb.velocity = Vector2.SmoothDamp(Enemy.rb.velocity, new Vector2(moveDir.normalized.x * Enemy.moveSpeed, Enemy.rb.velocity.y), ref Enemy.currentVelocity, Enemy.Grounded ? 0.12f : 0.25f);
         }
-        else if (Enemy.Grounded) Enemy.rb.velocity = new Vector2(0, 0);
+        else if (Enemy.Grounded) Enemy.rb.velocity = Vector2.MoveTowards(Enemy.rb.velocity, new Vector2(0, 0), Time.deltaTime * 40);
 
         if (Vector2.Distance(Enemy.player.transform.position, Enemy.rb.transform.position) <= 2f && Time.time >= Enemy.previousAttackTime + Enemy.attackSpeed)
         {
@@ -120,7 +120,7 @@ public class Searching : BaseEnemyState
     private void Jump()
     {
         Enemy.rb.velocity = new Vector2(Enemy.rb.velocity.x, 0);
-        Enemy.rb.AddForce(Vector2.up * 14, ForceMode2D.Impulse);
+        Enemy.rb.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
     }
 }
 
@@ -133,7 +133,6 @@ public class Attacking : BaseEnemyState
     public override void Enter()
     {
         hasHit = false;
-        Enemy.rb.velocity = new Vector2(0, Enemy.rb.velocity.y);
     }
 
     public override void Update()
