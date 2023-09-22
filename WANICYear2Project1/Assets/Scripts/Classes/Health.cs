@@ -14,24 +14,25 @@ public abstract class Health : MonoBehaviour
     [Header("Health Parameters")]
     [SerializeField] protected int currentHealth;
     [SerializeField] protected int maxHealth;
-    [SerializeField] private bool destroyAtZero;
+
+    [Header("Invulnerability")]
+    [SerializeField] private bool hasInvulnerability;
+    [SerializeField] protected float invulnerabilityTime;
+    private float previousHitTime;
 
 
     public void Hit(int damage)
     {
+        if (hasInvulnerability && Time.time < invulnerabilityTime + previousHitTime) return;
+
+        previousHitTime = Time.time;
+
         currentHealth -= damage;
 
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-
-            if (destroyAtZero) {
-                Destroy(gameObject);
-                return;
-            }
-
             OnDeath();
-
             return;
         }
 

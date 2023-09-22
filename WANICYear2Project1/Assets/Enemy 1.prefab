@@ -172,9 +172,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Debug: 0
-  moveSpeed: 12
+  moveSpeed: 8
+  attackSpeed: 0
+  attackDamage: 0
+  attackTime: 0
+  swingTime: 0
   layers:
     serializedVersion: 2
     m_Bits: 1
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 0
   constantGravity: -0.58
   Grounded: 0

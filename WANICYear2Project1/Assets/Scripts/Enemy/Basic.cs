@@ -31,6 +31,9 @@ public class Basic : StateMachine
     [Header("Collisions")]
     public LayerMask layers;
 
+    [Header("Attack Layers")]
+    public LayerMask attackLayer;
+
     [Header("Fall Parameters")]
     [SerializeField] private float constantGravity;
 
@@ -89,7 +92,7 @@ public class Searching : BaseEnemyState
             Vector3 moveDir = Enemy.player.transform.position - Enemy.rb.transform.position;
             Enemy.rb.velocity = Vector2.SmoothDamp(Enemy.rb.velocity, new Vector2(moveDir.normalized.x * Enemy.moveSpeed, Enemy.rb.velocity.y), ref Enemy.currentVelocity, Enemy.Grounded ? 0.12f : 0.25f);
         }
-        else if (Enemy.Grounded) Enemy.rb.velocity = new Vector2(0, 0);
+        else if (Enemy.Grounded) Enemy.rb.velocity = Vector2.MoveTowards(Enemy.rb.velocity, new Vector2(0, 0), Time.deltaTime * 40);
 
         if (Vector2.Distance(Enemy.player.transform.position, Enemy.rb.transform.position) <= 2f && Time.time >= Enemy.previousAttackTime + Enemy.attackSpeed)
         {
@@ -123,11 +126,13 @@ public class Searching : BaseEnemyState
 
 public class Attacking : BaseEnemyState
 {
+    private bool hasHit = false;
+
     public Attacking(Basic enemy) : base(enemy) { }
 
     public override void Enter()
     {
-        Enemy.rb.velocity = new Vector2(0, Enemy.rb.velocity.y);
+        hasHit = false;
     }
 
     public override void Update()
@@ -138,15 +143,24 @@ public class Attacking : BaseEnemyState
             return;
         }
 
-        if (Time.time > Enemy.previousAttackTime + Enemy.swingTime)
+        if (Time.time > Enemy.previousAttackTime + Enemy.swingTime && !hasHit)
         {
-            // Cast for player
+            Debug.Log("o");
+            RaycastHit2D player = Physics2D.BoxCast(Enemy.transform.position, Vector3.one * 1.1f, 0, new Vector2(Mathf.Sign(Enemy.player.transform.position.x - Enemy.rb.transform.position.x), 0), 1.8f, Enemy.attackLayer);
+
+            if (player.collider != null)
+            {
+                hasHit = true;
+                player.collider.GetComponent<PlayerHealth>().Hit(Enemy.attackDamage);
+            }
+
             return;
         }
     }
 
     public override void Exit()
     {
+        hasHit = false;
         Enemy.previousAttackTime = Time.time;
     }
 }
