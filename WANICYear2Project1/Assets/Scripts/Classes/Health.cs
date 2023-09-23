@@ -23,7 +23,7 @@ public abstract class Health : MonoBehaviour
 
     public void Hit(int damage)
     {
-        if (hasInvulnerability && Time.time < invulnerabilityTime + previousHitTime) return;
+        if (hasInvulnerability && Time.time <= invulnerabilityTime + previousHitTime) return;
 
         previousHitTime = Time.time;
 

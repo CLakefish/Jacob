@@ -152,6 +152,7 @@ public class Attacking : BaseEnemyState
             {
                 hasHit = true;
                 player.collider.GetComponent<PlayerHealth>().Hit(Enemy.attackDamage);
+                player.collider.attachedRigidbody.AddForce((Enemy.player.transform.position - Enemy.transform.position).normalized * 5, ForceMode2D.Impulse);
             }
 
             return;
