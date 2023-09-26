@@ -18,8 +18,8 @@ public class PlayerHealth : Health
     protected override void OnDeath()
     {
         //Destroy(gameObject);
-        //HealthBar.value = 0;
-        //HealthBar.fillRect.gameObject.SetActive(false);
+        HealthBar.value = 0;
+        HealthBar.fillRect.gameObject.SetActive(false);
     }
 
     // When the player is hit
@@ -27,15 +27,15 @@ public class PlayerHealth : Health
     {
         rb.velocity = new Vector2(0, 0);
         rb.AddForce(Vector2.up * 12, ForceMode2D.Impulse);
-        //HealthBar.value = currentHealth;
+        HealthBar.value = currentHealth;
     }
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //HealthBar.maxValue = maxHealth;
-        //HealthBar.fillRect.gameObject.SetActive(true);
+        HealthBar.maxValue = maxHealth;
+        HealthBar.fillRect.gameObject.SetActive(true);
     }
 
     private void Update()
