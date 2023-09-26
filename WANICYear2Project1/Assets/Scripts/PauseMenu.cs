@@ -14,9 +14,6 @@ public class PauseMenu : MonoBehaviour
     public static bool SettingsisOpen = false;
     public static bool canPause = false;
     private bool isPaused = false;
-
-    public GameObject ClosingUI;
-    public GameObject OpeningUI;
     public GameObject PauseUI;
 
     private void Awake()
@@ -63,14 +60,11 @@ public class PauseMenu : MonoBehaviour
     public void OpenSettings()
     {
         SettingsisOpen = true;
-        OpeningUI.SetActive(true);
-        ClosingUI.SetActive(false);
+
     }
     public void CloseSettings()
     {
         SettingsisOpen = false;
-        OpeningUI.SetActive(false);
-        ClosingUI.SetActive(true);
 
     }
     public void StartGame()
