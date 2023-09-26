@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1554100703906330439}
   - component: {fileID: 5383540690418292626}
   - component: {fileID: 649196266448161208}
+  - component: {fileID: -9051074050803629467}
   m_Layer: 10
   m_Name: Enemy 1
   m_TagString: Untagged
@@ -173,15 +174,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Debug: 0
   moveSpeed: 8
-  attackSpeed: 0
-  attackDamage: 0
-  attackTime: 0
-  swingTime: 0
+  attackSpeed: 1
+  attackDamage: 1
+  attackTime: 0.4
+  swingTime: 0.2
   layers:
     serializedVersion: 2
     m_Bits: 1
   attackLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   constantGravity: -0.58
   Grounded: 0
+--- !u!114 &-9051074050803629467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7643072773071781041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6d41ac7b50868419ca360e9250f03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 1
+  maxHealth: 1
+  hasInvulnerability: 0
+  invulnerabilityTime: 0

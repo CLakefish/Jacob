@@ -19,12 +19,13 @@ public abstract class Health : MonoBehaviour
     [SerializeField] private bool hasInvulnerability;
     [SerializeField] protected float invulnerabilityTime;
     private float previousHitTime;
+    internal Vector3 hitPoint;
 
-
-    public void Hit(int damage)
+    public void Hit(int damage, Vector3 position)
     {
         if (hasInvulnerability && Time.time <= invulnerabilityTime + previousHitTime) return;
 
+        hitPoint = position;
         previousHitTime = Time.time;
 
         currentHealth -= damage;

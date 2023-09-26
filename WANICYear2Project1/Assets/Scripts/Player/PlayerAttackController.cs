@@ -58,8 +58,10 @@ public class PlayerAttackController : MonoBehaviour
             for (int i = 0; i < hits.Length; i++)
             {
                 int enemyDirection = (int)Mathf.Sign(hits[i].transform.position.x - transform.position.x);
-                if (enemyDirection == direction)
+
+                if (enemyDirection == direction && hits[i].attachedRigidbody != null)
                 {
+                    hits[i].GetComponent<Health>().Hit(1, transform.position);
                     print("Hit!");
                 }
             }
@@ -78,9 +80,14 @@ public class PlayerAttackController : MonoBehaviour
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, airAttackRadius, maskEnemy);
             for (int i = 0; i < hits.Length; i++)
             {
-                print("Hit!");
+                if (hits[i].attachedRigidbody != null)
+                {
+                    hits[i].GetComponent<Health>().Hit(1, transform.position);
+                }
             }
+
             timer -= Time.deltaTime;
+
             yield return null;
         }
 

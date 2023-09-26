@@ -7,6 +7,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.U2D;
 
@@ -14,6 +15,7 @@ public class Basic : StateMachine
 {
     public Searching Searching;
     public Attacking Attacking;
+    public Knockback Knockback;
     protected override State Initialize() { return Searching; }
 
     internal Rigidbody2D rb;
@@ -53,6 +55,7 @@ public class Basic : StateMachine
 
         Searching = new(this);
         Attacking = new(this);
+        Knockback = new(this);
 
         moveSpeed -= Random.Range(-2f, 2f);
 
@@ -151,7 +154,7 @@ public class Attacking : BaseEnemyState
             if (player.collider != null)
             {
                 hasHit = true;
-                player.collider.GetComponent<PlayerHealth>().Hit(Enemy.attackDamage);
+                player.collider.GetComponent<PlayerHealth>().Hit(Enemy.attackDamage, Enemy.transform.position);
                 player.collider.attachedRigidbody.AddForce((Enemy.player.transform.position - Enemy.transform.position).normalized * 5, ForceMode2D.Impulse);
             }
 
@@ -163,5 +166,33 @@ public class Attacking : BaseEnemyState
     {
         hasHit = false;
         Enemy.previousAttackTime = Time.time;
+    }
+}
+
+public class Knockback : BaseEnemyState
+{
+    private LayerMask enemyLayer;
+    private Collider2D collider;
+    private List<Collider2D> hit = new();
+
+    public Knockback(Basic enemy) : base(enemy) { }
+
+    public override void Enter()
+    {
+        Enemy.rb.velocity = new Vector2(0, 0);
+        Enemy.rb.gravityScale = 1;
+        enemyLayer = LayerMask.GetMask("Enemy");
+        collider = Enemy.gameObject.GetComponent<Collider2D>();
+    }
+
+    public override void Update()
+    {
+        RaycastHit2D enemy = Physics2D.BoxCast(Enemy.rb.transform.position, Vector2.one, 0, Vector2.zero, 1f, enemyLayer);
+
+        if (enemy.collider != null && enemy.collider != collider && !hit.Contains(enemy.collider))
+        {
+            hit.Add(enemy.collider);
+            enemy.collider.GetComponent<Health>().Hit(1, Enemy.transform.position);
+        }
     }
 }
