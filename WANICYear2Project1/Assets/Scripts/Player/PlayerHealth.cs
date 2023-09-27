@@ -42,7 +42,7 @@ public class PlayerHealth : Health
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            Hit(1);
+            //Hit();
         }
     }
 }
