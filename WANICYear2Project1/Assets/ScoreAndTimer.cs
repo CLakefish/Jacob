@@ -13,6 +13,7 @@ public class ScoreAndTimer : MonoBehaviour
 
     public int HighScore;
     public int PossibleScore;
+    public int Multiplier;
     public float MulitplierTimer;
     private float timer;
 
@@ -39,14 +40,16 @@ public class ScoreAndTimer : MonoBehaviour
         } 
         else if(PossibleScore > 0)
         {
-            currentScore += PossibleScore;
+            currentScore += PossibleScore * Multiplier;
             PossibleScore = 0;
+            Multiplier = 1;
         }
 
     }
 
    internal void multiplyChain()
    {
-        PossibleScore = PossibleScore*2;
-   }
+        Multiplier++;
+        timer = MulitplierTimer;
+    }
 }

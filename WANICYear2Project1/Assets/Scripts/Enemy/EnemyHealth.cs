@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHealth : Health
 {
     private Basic reference;
-
+    public bool HitByPlayer;
     protected override void OnDeath()
     {
         reference.ChangeState(reference.Knockback);
@@ -20,6 +20,7 @@ public class EnemyHealth : Health
     private void Start()
     {
         reference = GetComponent<Basic>();
+        HitByPlayer = false;
     }
 
     private IEnumerator Death()
@@ -29,7 +30,11 @@ public class EnemyHealth : Health
         reference.rb.AddForce(((transform.position - hitPoint).normalized + Vector3.up) * 4, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(0.5f);
-        ScoreAndTimer.Singleton.GainPoints(10);
+
+        if (HitByPlayer)
+            ScoreAndTimer.Singleton.GainPoints(10);
+        else
+            ScoreAndTimer.Singleton.multiplyChain();
 
         Destroy(gameObject);
 

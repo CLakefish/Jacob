@@ -62,6 +62,7 @@ public class PlayerAttackController : MonoBehaviour
                 if (enemyDirection == direction && hits[i].attachedRigidbody != null)
                 {
                     hits[i].GetComponent<Health>().Hit(1, transform.position);
+                    hits[i].GetComponent<EnemyHealth>().HitByPlayer = true;
                     print("Hit!");
                 }
             }
@@ -83,6 +84,7 @@ public class PlayerAttackController : MonoBehaviour
                 if (hits[i].attachedRigidbody != null)
                 {
                     hits[i].GetComponent<Health>().Hit(1, transform.position);
+                    hits[i].GetComponent<EnemyHealth>().HitByPlayer = true;
                 }
             }
 
