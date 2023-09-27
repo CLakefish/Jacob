@@ -5,43 +5,48 @@ using UnityEngine;
 
 public class ScoreAndTimer : MonoBehaviour
 {
-    public TMP_Text ScoreTXT;
+    [Header("References")]
+    [SerializeField] private TMP_Text text;
+    public static ScoreAndTimer Singleton;
+    public int currentScore { get; private set; }
+
+
     public int HighScore;
-    public int score;
-    private int PossibleScore;
+    public int PossibleScore;
     public float MulitplierTimer;
     private float timer;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        //get past HighScore
+        Singleton = this;
+    }
 
-        
-
+    internal void GainPoints(int points)
+    {
+        PossibleScore += points;
+        timer = MulitplierTimer;
     }
 
     // Update is called once per frame
     void Update()
     {
         //constanty update Timer and Score
-        ScoreTXT.text = "Score: " + score;
+        text.text = "Score: " + currentScore;
         if(timer >= 0)
         {
             timer -= Time.deltaTime;
-        }
+            
+        } 
         else if(PossibleScore > 0)
         {
-            score = PossibleScore;
+            currentScore += PossibleScore;
             PossibleScore = 0;
         }
 
     }
 
-    void GainPoints(int score, int Chain)
-    {
-        PossibleScore += score * Chain;
-        timer = MulitplierTimer;
-    }
+   internal void multiplyChain()
+   {
+        PossibleScore = PossibleScore*2;
+   }
 }

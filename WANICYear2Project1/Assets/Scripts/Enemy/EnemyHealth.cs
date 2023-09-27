@@ -29,7 +29,9 @@ public class EnemyHealth : Health
         reference.rb.AddForce(((transform.position - hitPoint).normalized + Vector3.up) * 4, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(0.5f);
+        ScoreAndTimer.Singleton.GainPoints(10);
 
         Destroy(gameObject);
+
     }
 }

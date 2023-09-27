@@ -15,6 +15,8 @@ public class EnemySpawner : MonoBehaviour
     private float SpawnRate;
     public float MaxSpawnRate;
 
+    
+
     public float DifficultyRate;
     // Start is called before the first frame update
     void Start()
