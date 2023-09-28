@@ -16,7 +16,7 @@ public class ScoreAndTimer : MonoBehaviour
     public int PossibleScore;
     public int Multiplier;
     public float MulitplierTimer;
-    private float timer;
+    private float timer = 0;
 
     void Start()
     {
