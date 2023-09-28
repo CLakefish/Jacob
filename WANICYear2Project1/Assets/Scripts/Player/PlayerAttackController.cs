@@ -81,7 +81,7 @@ public class PlayerAttackController : MonoBehaviour
         airAttackIndicator.enabled = true;
         float timer = duration;
 
-        while (timer > 0 && movementController.currentState != movementController.Walking)
+        while (timer > 0)
         {
 
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, airAttackRadius, maskEnemy);
