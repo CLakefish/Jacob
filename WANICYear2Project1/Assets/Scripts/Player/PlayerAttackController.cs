@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerAttackController : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerAttackController : MonoBehaviour
     int direction;
 
     [SerializeField] SpriteRenderer groundAttackIndicator;
+    [SerializeField] SpriteRenderer airAttackIndicator;
 
     Rigidbody2D rb;
     MovementController movementController;
@@ -19,6 +21,7 @@ public class PlayerAttackController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         maskEnemy = LayerMask.GetMask("Enemy");
         groundAttackIndicator.size = 2 * groundAttackRadius * Vector2.one;
+        airAttackIndicator.size = 2 * airAttackRadius * Vector2.one;
     }
 
     void Update()
@@ -55,11 +58,12 @@ public class PlayerAttackController : MonoBehaviour
         while (timer > 0)
         {
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, groundAttackRadius, maskEnemy);
+            
             for (int i = 0; i < hits.Length; i++)
             {
                 int enemyDirection = (int)Mathf.Sign(hits[i].transform.position.x - transform.position.x);
 
-                if (enemyDirection == direction && hits[i].attachedRigidbody != null)
+                if ((enemyDirection == direction) && hits[i].attachedRigidbody != null)
                 {
                     hits[i].GetComponent<Health>().Hit(1, transform.position);
                     hits[i].GetComponent<EnemyHealth>().HitByPlayer = true;
@@ -74,10 +78,12 @@ public class PlayerAttackController : MonoBehaviour
     }
     IEnumerator AirAttack(float duration)
     {
+        airAttackIndicator.enabled = true;
         float timer = duration;
 
-        while (timer > 0)
+        while (timer > 0 && movementController.currentState != movementController.Walking)
         {
+
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, airAttackRadius, maskEnemy);
             for (int i = 0; i < hits.Length; i++)
             {
@@ -93,7 +99,7 @@ public class PlayerAttackController : MonoBehaviour
             yield return null;
         }
 
-        // todo: add indicator enabling
+        airAttackIndicator.enabled = false;
     }
 
     private void OnDrawGizmos()
