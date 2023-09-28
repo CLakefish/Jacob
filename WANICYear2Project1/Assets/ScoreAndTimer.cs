@@ -7,6 +7,7 @@ public class ScoreAndTimer : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private TMP_Text text;
+    [SerializeField] private TMP_Text text2;
     public static ScoreAndTimer Singleton;
     public int currentScore { get; private set; }
 
@@ -20,6 +21,7 @@ public class ScoreAndTimer : MonoBehaviour
     void Start()
     {
         Singleton = this;
+        text2.gameObject.SetActive(false);
     }
 
     internal void GainPoints(int points)
@@ -36,6 +38,8 @@ public class ScoreAndTimer : MonoBehaviour
         if(timer >= 0)
         {
             timer -= Time.deltaTime;
+            text2.gameObject.SetActive(true);
+            text2.text = PossibleScore + "*" + Multiplier;
             
         } 
         else if(PossibleScore > 0)
@@ -43,6 +47,7 @@ public class ScoreAndTimer : MonoBehaviour
             currentScore += PossibleScore * Multiplier;
             PossibleScore = 0;
             Multiplier = 1;
+            text2.gameObject.SetActive(false);
         }
 
     }
