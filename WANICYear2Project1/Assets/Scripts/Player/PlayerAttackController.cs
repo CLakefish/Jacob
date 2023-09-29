@@ -50,7 +50,7 @@ public class PlayerAttackController : MonoBehaviour
 
     IEnumerator GroundAttack(float duration)
     {
-        groundAttackIndicator.flipX = direction == -1;
+        groundAttackIndicator.flipX = direction == 1;
         groundAttackIndicator.enabled = true;
 
         float timer = duration;
