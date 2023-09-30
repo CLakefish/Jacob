@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -15,12 +17,17 @@ public class EnemySpawner : MonoBehaviour
     private float SpawnRate;
     public float MaxSpawnRate;
 
-    
+    public int EnemiesKilledPerRaise;
+    public float RaiseValue;
 
     public float DifficultyRate;
+
+    public TMP_Text DifficultyText;
+    public TMP_Text DifficultyText2;
     // Start is called before the first frame update
     void Start()
     {
+        RaiseValue = 10;
     }
 
     // Update is called once per frame
@@ -40,7 +47,12 @@ public class EnemySpawner : MonoBehaviour
         {
             SpawnRate = SpawnRate - 1 * Time.deltaTime;
         }
-
+        if(EnemiesKilledPerRaise > RaiseValue)
+        {
+            IncreaseDifficulty();
+        }
+        DifficultyText.text = "S: " + DifficultyRate + "x";
+        DifficultyText2.text = "E: " + Mathf.Round(RaiseValue - EnemiesKilledPerRaise);
 
     }
 
@@ -48,10 +60,13 @@ public class EnemySpawner : MonoBehaviour
     {
         if (DifficultyRate < 4) //makes certain that no matter what the gmae will only take away atleast 4 seconds from the spawn rate. set ACTUAL spawn rate to be greater than 8.
         {
-            DifficultyRate = DifficultyRate += 0.5f;
             MaxSpawnRate -= 0.5f;
         }
+        DifficultyRate = DifficultyRate += 0.5f;
+
         EnemiesPerSpawn++;
+        RaiseValue = 10 * DifficultyRate *DifficultyRate;
+        EnemiesKilledPerRaise = 0;
     }
     private void SpawnEnemy()
     {

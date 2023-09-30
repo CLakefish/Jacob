@@ -8,26 +8,31 @@ public class ScoreAndTimer : MonoBehaviour
     [Header("References")]
     [SerializeField] private TMP_Text text;
     [SerializeField] private TMP_Text text2;
+    [SerializeField] private TMP_Text HighScoreText;
     public static ScoreAndTimer Singleton;
-    public int currentScore { get; private set; }
+    public float currentScore { get; private set; }
 
 
     public int HighScore;
-    public int PossibleScore;
-    public int Multiplier;
+    public float PossibleScore;
+    public float Multiplier;
     public float MulitplierTimer;
     private float timer = 0;
+
+    EnemySpawner EnemySpawner;
 
     void Start()
     {
         Singleton = this;
         text2.gameObject.SetActive(false);
+        EnemySpawner = GetComponent<EnemySpawner>();
     }
 
     internal void GainPoints(int points)
     {
-        PossibleScore += points;
+        PossibleScore += points * EnemySpawner.DifficultyRate;
         timer = MulitplierTimer;
+        EnemySpawner.EnemiesKilledPerRaise++;
     }
 
     // Update is called once per frame
@@ -49,12 +54,13 @@ public class ScoreAndTimer : MonoBehaviour
             Multiplier = 1;
             text2.gameObject.SetActive(false);
         }
-
+        HighScoreText.text = "H: " + HighScore;
     }
 
    internal void multiplyChain()
    {
         Multiplier++;
         timer = MulitplierTimer;
+        EnemySpawner.EnemiesKilledPerRaise++;
     }
 }
