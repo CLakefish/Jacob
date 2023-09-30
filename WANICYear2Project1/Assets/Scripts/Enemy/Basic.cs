@@ -69,7 +69,7 @@ public class Basic : StateMachine
         RaycastHit2D ground = Physics2D.BoxCast(rb.transform.position - new Vector3(0, sprite.bounds.extents.y - 0.01f, 0), new Vector2(sprite.bounds.size.x - 0.05f, 0.005f), 0, Vector2.down, 0.05f, layers);
         Grounded = ground.collider != null;
 
-        if (currentState == Searching) sprite.flipX = rb.velocity.x < 0;
+        if (currentState == Searching) sprite.flipX = (player.transform.position - transform.position).x < 0;
 
         base.Update();
     }
