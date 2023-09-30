@@ -20,7 +20,8 @@ public class Basic : StateMachine
 
     internal Rigidbody2D rb;
     internal MovementController player;
-    private SpriteRenderer sprite;
+    internal SpriteRenderer sprite;
+    internal Animator animator;
 
     [Header("Movement Parameters")]
     [SerializeField] internal float moveSpeed;
@@ -52,6 +53,7 @@ public class Basic : StateMachine
         rb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<MovementController>();
         sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         Searching = new(this);
         Attacking = new(this);
@@ -66,6 +68,8 @@ public class Basic : StateMachine
     {
         RaycastHit2D ground = Physics2D.BoxCast(rb.transform.position - new Vector3(0, sprite.bounds.extents.y - 0.01f, 0), new Vector2(sprite.bounds.size.x - 0.05f, 0.005f), 0, Vector2.down, 0.05f, layers);
         Grounded = ground.collider != null;
+
+        if (currentState == Searching) sprite.flipX = rb.velocity.x < 0;
 
         base.Update();
     }
@@ -87,6 +91,13 @@ public class BaseEnemyState : State
 public class Searching : BaseEnemyState
 {
     public Searching(Basic enemy) : base(enemy) { }
+
+    public override void Enter()
+    {
+        Enemy.animator.SetBool("Swinging", false);
+        Enemy.animator.SetBool("Hit", false);
+        Enemy.animator.SetBool("Knockback", false);
+    }
 
     public override void Update()
     {
@@ -149,10 +160,12 @@ public class Attacking : BaseEnemyState
         if (Time.time > Enemy.previousAttackTime + Enemy.swingTime && !hasHit)
         {
             Debug.Log("o");
+            Enemy.animator.SetBool("Swinging", true);
             RaycastHit2D player = Physics2D.BoxCast(Enemy.transform.position, Vector3.one * 1.1f, 0, new Vector2(Mathf.Sign(Enemy.player.transform.position.x - Enemy.rb.transform.position.x), 0), 1.8f, Enemy.attackLayer);
 
             if (player.collider != null)
             {
+                Enemy.animator.SetBool("Hit", true);
                 hasHit = true;
                 player.collider.GetComponent<PlayerHealth>().Hit(Enemy.attackDamage, Enemy.transform.position);
                 player.collider.attachedRigidbody.AddForce((Enemy.player.transform.position - Enemy.transform.position).normalized * 5, ForceMode2D.Impulse);
@@ -179,8 +192,8 @@ public class Knockback : BaseEnemyState
 
     public override void Enter()
     {
-        Enemy.rb.velocity = new Vector2(0, 0);
-        Enemy.rb.gravityScale = 1;
+        Enemy.sprite.color = Color.red;
+        Enemy.animator.SetBool("Knockback", true);
         enemyLayer = LayerMask.GetMask("Enemy");
         collider = Enemy.gameObject.GetComponent<Collider2D>();
     }
@@ -193,6 +206,7 @@ public class Knockback : BaseEnemyState
         {
             hit.Add(enemy.collider);
             enemy.collider.GetComponent<Health>().Hit(1, Enemy.transform.position);
+            enemy.collider.GetComponent<SpriteRenderer>().color = Color.red;
         }
     }
 }

@@ -17,6 +17,7 @@ public class EnemyHealth : Health
 
     protected override void OnHit()
     {
+        reference.ChangeState(reference.Knockback);
         return;
     }
 
@@ -34,7 +35,8 @@ public class EnemyHealth : Health
             died = true;
             GetComponent<SpriteRenderer>().color = Color.white;
 
-            reference.rb.AddForce(((transform.position - hitPoint).normalized + Vector3.up) * 4, ForceMode2D.Impulse);
+            reference.rb.velocity = new Vector2(0, 0);
+            reference.rb.AddForce(((transform.position - hitPoint).normalized + Vector3.up) * 12, ForceMode2D.Impulse);
 
             yield return new WaitForSeconds(0.5f);
 
