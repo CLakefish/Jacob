@@ -1298,6 +1298,7 @@ MonoBehaviour:
   hasInvulnerability: 1
   invulnerabilityTime: 1
   HealthBar: {fileID: 1241159110}
+  DeathPanel: {fileID: 982322840}
 --- !u!114 &529598062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,6 +1551,7 @@ MonoBehaviour:
   PossibleScore: 0
   Multiplier: 1
   MulitplierTimer: 3
+  ScoreTXT: {fileID: 0}
 --- !u!1 &542315221
 GameObject:
   m_ObjectHideFlags: 0
