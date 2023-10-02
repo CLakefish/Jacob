@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAttackController : MonoBehaviour
 {
@@ -15,6 +16,16 @@ public class PlayerAttackController : MonoBehaviour
     Rigidbody2D rb;
     MovementController movementController;
     int maskEnemy;
+
+    [Tooltip("slider for Stamina")] public Slider AttackSlider;
+    private float SpentAttack;
+    [Tooltip("time until Stamina increases faster")] public int AttackTime;
+    [Tooltip("MaxStamina")] public int MaxAttackTime;
+    [Tooltip("stamina")] public float Stamina;
+    [Tooltip("stamina gained per second")] public float staminaGain;
+    [Tooltip("Main attack Stamina Loss")] public int MainAttackLoss;
+    [Tooltip("Jump attack Stamina loss")] public int HeavyAttackLoss;
+    [Tooltip("lower threshold for attacking")] public int attackthreshold;
     void Start()
     {
         movementController = GetComponent<MovementController>();
@@ -22,6 +33,8 @@ public class PlayerAttackController : MonoBehaviour
         maskEnemy = LayerMask.GetMask("Enemy");
         groundAttackIndicator.size = 2 * groundAttackRadius * Vector2.one;
         airAttackIndicator.size = 2 * airAttackRadius * Vector2.one;
+        AttackSlider.maxValue = MaxAttackTime;
+        AttackSlider.value = MaxAttackTime;
     }
 
     void Update()
@@ -34,20 +47,46 @@ public class PlayerAttackController : MonoBehaviour
         {
             direction = (int)Mathf.Sign(rb.velocity.x);
         }
+
+        if(Stamina < MaxAttackTime) //if you dont have full stamina
+        {
+            if(SpentAttack > 0)
+            {
+                Stamina += staminaGain;
+                SpentAttack -= Time.deltaTime;
+            }
+            else
+            {
+                Stamina += staminaGain * 2;
+                SpentAttack = 0; //reseting spent attack just in case
+            }
+        }
+        else
+        {
+            Stamina = MaxAttackTime;
+        }
+
+        AttackSlider.value = Stamina;
     }
 
     void Attack()
     {
-        if (movementController.currentState == movementController.Walking)
+        if (movementController.currentState == movementController.Walking && Stamina > attackthreshold)
         {
             StartCoroutine(GroundAttack(0.2f));
+            StaminaLose(MainAttackLoss);
         }
-        else if (movementController.currentState == movementController.Jumping || movementController.currentState == movementController.Falling)
+        else if (movementController.currentState == movementController.Jumping || movementController.currentState == movementController.Falling && Stamina > attackthreshold)
         {
+            StaminaLose(HeavyAttackLoss);
             StartCoroutine(AirAttack(0.5f));
         }
     }
-
+    private void StaminaLose(int Loss)
+    {
+        Stamina -= Loss;
+        SpentAttack = AttackTime;
+    }
     IEnumerator GroundAttack(float duration)
     {
         groundAttackIndicator.flipX = direction == 1;

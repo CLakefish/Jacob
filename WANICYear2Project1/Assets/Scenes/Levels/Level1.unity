@@ -1225,7 +1225,6 @@ MonoBehaviour:
   EnemiesKilledPerRaise: 0
   RaiseValue: 10
   DifficultyRate: 1
-  DifficultySlider: {fileID: 2097282718}
   DifficultyText: {fileID: 456239807}
   DifficultyText2: {fileID: 12614604}
 --- !u!114 &529598069
@@ -1257,6 +1256,14 @@ MonoBehaviour:
   airAttackRadius: 1
   groundAttackIndicator: {fileID: 385825584}
   airAttackIndicator: {fileID: 121669209}
+  AttackSlider: {fileID: 2097282718}
+  AttackTime: 3
+  MaxAttackTime: 100
+  Stamina: 100
+  staminaGain: 0.3
+  MainAttackLoss: 40
+  HeavyAttackLoss: 25
+  attackthreshold: 25
 --- !u!114 &529598071
 MonoBehaviour:
   m_ObjectHideFlags: 0
