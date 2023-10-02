@@ -14,12 +14,19 @@ public class PlayerHealth : Health
 {
     private Rigidbody2D rb;
      [SerializeField] public Slider HealthBar;
+
+    public GameObject DeathPanel;
+    private bool isDead = false;
+    private Image DeathImage;
     // When the player dies
     protected override void OnDeath()
     {
         //Destroy(gameObject);
         HealthBar.value = 0;
         HealthBar.fillRect.gameObject.SetActive(false);
+        ScoreAndTimer.Singleton.Die();
+        DeathPanel.SetActive(true);
+        isDead = true;
     }
 
     // When the player is hit
@@ -36,6 +43,9 @@ public class PlayerHealth : Health
         rb = GetComponent<Rigidbody2D>();
         HealthBar.maxValue = maxHealth;
         HealthBar.fillRect.gameObject.SetActive(true);
+        DeathPanel.SetActive(false);
+        DeathImage = DeathPanel.GetComponent<Image>();
+        DeathImage.color = new Color(DeathImage.color.r, DeathImage.color.g, DeathImage.color.b, 0f);
     }
 
     private void Update()
@@ -44,6 +54,14 @@ public class PlayerHealth : Health
         {
             //Hit();
         }
+        if (isDead)
+        {
+            while(DeathImage.color.a <= 1f)
+            {
+                DeathImage.color = new Color(DeathImage.color.r, DeathImage.color.g, DeathImage.color.b, +0.1f);
+            }
+        }
+
     }
 }
 

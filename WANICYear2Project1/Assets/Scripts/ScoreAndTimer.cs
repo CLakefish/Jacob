@@ -13,11 +13,13 @@ public class ScoreAndTimer : MonoBehaviour
     public float currentScore { get; private set; }
 
 
-    public int HighScore;
+    public float HighScore;
     public float PossibleScore;
     public float Multiplier;
     public float MulitplierTimer;
     private float timer = 0;
+
+    public TMP_Text ScoreTXT;
 
     EnemySpawner EnemySpawner;
 
@@ -27,7 +29,14 @@ public class ScoreAndTimer : MonoBehaviour
         text2.gameObject.SetActive(false);
         EnemySpawner = GetComponent<EnemySpawner>();
     }
-
+    internal void Die()
+    {
+        if(currentScore > HighScore)
+        {
+            HighScore = currentScore;
+        }
+        ScoreTXT.text = "Score: " + currentScore + " HighScore: " + HighScore;
+    }
     internal void GainPoints(int points)
     {
         PossibleScore += points * EnemySpawner.DifficultyRate;
