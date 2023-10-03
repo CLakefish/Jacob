@@ -438,6 +438,7 @@ MonoBehaviour:
   hasInvulnerability: 1
   invulnerabilityTime: 1
   HealthBar: {fileID: 0}
+  DeathPanel: {fileID: 0}
 --- !u!114 &5330006289782752910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,7 +456,11 @@ MonoBehaviour:
   RightSpawnPoint: {x: 9.46, y: 3.06}
   EnemiesPerSpawn: 1
   MaxSpawnRate: 5
+  EnemiesKilledPerRaise: 0
+  RaiseValue: 0
   DifficultyRate: 1
+  DifficultyText: {fileID: 0}
+  DifficultyText2: {fileID: 0}
 --- !u!114 &7742839875328092031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,6 +490,14 @@ MonoBehaviour:
   airAttackRadius: 1
   groundAttackIndicator: {fileID: 4184009830765580639}
   airAttackIndicator: {fileID: 8059275352264928833}
+  AttackSlider: {fileID: 0}
+  AttackTime: 0
+  MaxAttackTime: 0
+  Stamina: 0
+  staminaGain: 0
+  MainAttackLoss: 0
+  HeavyAttackLoss: 0
+  attackthreshold: 0
 --- !u!114 &4002689263743673340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,10 +511,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 0}
+  text2: {fileID: 0}
+  HighScoreText: {fileID: 0}
   HighScore: 0
   PossibleScore: 0
   Multiplier: 0
   MulitplierTimer: 0
+  ScoreTXT: {fileID: 0}
 --- !u!1 &5830614213673990103
 GameObject:
   m_ObjectHideFlags: 0
