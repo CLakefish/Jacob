@@ -45,6 +45,7 @@ public class Basic : StateMachine
 
     internal Vector2 moveDir;
     internal Vector2 currentVelocity;
+    internal int knockBackCount;
 
     public bool Grounded;
 
@@ -146,6 +147,8 @@ public class Attacking : BaseEnemyState
 
     public override void Enter()
     {
+        Enemy.previousAttackTime = Time.time;
+        Enemy.rb.velocity = new Vector2(0, Enemy.rb.velocity.y);
         hasHit = false;
     }
 
@@ -157,7 +160,7 @@ public class Attacking : BaseEnemyState
             return;
         }
 
-        if (Time.time > Enemy.previousAttackTime + Enemy.swingTime && !hasHit)
+        if (Time.time > Enemy.previousAttackTime + Enemy.swingTime && !hasHit && Enemy.stateDuration > 0.25f)
         {
             Debug.Log("o");
             Enemy.animator.SetBool("Swinging", true);
@@ -170,8 +173,6 @@ public class Attacking : BaseEnemyState
                 player.collider.GetComponent<PlayerHealth>().Hit(Enemy.attackDamage, Enemy.transform.position);
                 player.collider.attachedRigidbody.AddForce((Enemy.player.transform.position - Enemy.transform.position).normalized * 5, ForceMode2D.Impulse);
             }
-
-            return;
         }
     }
 
@@ -200,11 +201,17 @@ public class Knockback : BaseEnemyState
 
     public override void Update()
     {
+        if (Enemy.knockBackCount <= 2) return;
+
         RaycastHit2D enemy = Physics2D.BoxCast(Enemy.rb.transform.position, Vector2.one, 0, Vector2.zero, 1f, enemyLayer);
 
         if (enemy.collider != null && enemy.collider != collider && !hit.Contains(enemy.collider))
         {
+            Enemy.knockBackCount++;
+
             hit.Add(enemy.collider);
+
+            enemy.collider.GetComponent<Basic>().knockBackCount = Enemy.knockBackCount;
             enemy.collider.GetComponent<Health>().Hit(1, Enemy.transform.position);
             enemy.collider.GetComponent<SpriteRenderer>().color = Color.red;
         }

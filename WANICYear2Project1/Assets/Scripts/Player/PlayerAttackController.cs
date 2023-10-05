@@ -6,12 +6,18 @@ using UnityEngine.UI;
 
 public class PlayerAttackController : MonoBehaviour
 {
-    [SerializeField] float groundAttackRadius;
-    [SerializeField] float airAttackRadius;
-    int direction;
+    [Header("Sword Radius")]
+    [SerializeField] private float groundAttackRadius;
+    [SerializeField] private float airAttackRadius;
+    private int direction;
+    private int swingCount;
 
-    [SerializeField] SpriteRenderer groundAttackIndicator;
-    [SerializeField] SpriteRenderer airAttackIndicator;
+    //[SerializeField] SpriteRenderer groundAttackIndicator;
+    //[SerializeField] SpriteRenderer airAttackIndicator;
+    [Header("References")]
+    [SerializeField] private GameObject sword;
+    [SerializeField] private GameObject hitParticles;
+    private GameObject swordObj;
 
     Rigidbody2D rb;
     MovementController movementController;
@@ -31,8 +37,8 @@ public class PlayerAttackController : MonoBehaviour
         movementController = GetComponent<MovementController>();
         rb = GetComponent<Rigidbody2D>();
         maskEnemy = LayerMask.GetMask("Enemy");
-        groundAttackIndicator.size = 2 * groundAttackRadius * Vector2.one;
-        airAttackIndicator.size = 2 * airAttackRadius * Vector2.one;
+        //groundAttackIndicator.size = 2 * groundAttackRadius * Vector2.one;
+        //airAttackIndicator.size = 2 * airAttackRadius * Vector2.one;
         AttackSlider.maxValue = MaxAttackTime;
         AttackSlider.value = MaxAttackTime;
     }
@@ -71,6 +77,16 @@ public class PlayerAttackController : MonoBehaviour
 
     void Attack()
     {
+        if (swordObj != null) Destroy(swordObj);
+
+        swordObj = Instantiate(sword, transform, false);
+        swingCount++;
+        swingCount %= 2;
+
+        SpriteRenderer swordSprite = swordObj.GetComponent<SpriteRenderer>();
+        swordSprite.flipX = direction != 1;
+        swordSprite.flipY = swingCount == 1;
+
         if (movementController.currentState == movementController.Walking && Stamina > attackthreshold)
         {
             StartCoroutine(GroundAttack(0.2f));
@@ -89,8 +105,9 @@ public class PlayerAttackController : MonoBehaviour
     }
     IEnumerator GroundAttack(float duration)
     {
-        groundAttackIndicator.flipX = direction == 1;
-        groundAttackIndicator.enabled = true;
+        //groundAttackIndicator.flipX = direction == 1;
+        //groundAttackIndicator.enabled = true;
+        Destroy(swordObj, duration);
 
         float timer = duration;
 
@@ -104,20 +121,29 @@ public class PlayerAttackController : MonoBehaviour
 
                 if ((enemyDirection == direction) && hits[i].attachedRigidbody != null)
                 {
-                    hits[i].GetComponent<Health>().Hit(1, transform.position);
-                    hits[i].GetComponent<EnemyHealth>().HitByPlayer = true;
-                    print("Hit!");
+                    EnemyHealth h = hits[i].GetComponent<EnemyHealth>();
+
+                    if (!h.died) {
+                        Instantiate(hitParticles, hits[i].attachedRigidbody.transform.position, Quaternion.identity);
+                        StartCoroutine(HitVFX());
+                    }
+
+                    h.Hit(1, transform.position);
+                    h.HitByPlayer = true;
                 }
             }
             timer -= Time.deltaTime;
             yield return null;
         }
         
-        groundAttackIndicator.enabled = false;
+        //groundAttackIndicator.enabled = false;
     }
     IEnumerator AirAttack(float duration)
     {
-        airAttackIndicator.enabled = true;
+        //airAttackIndicator.enabled = true;
+        swordObj.GetComponent<Animator>().SetBool("Air", true);
+        Destroy(swordObj, duration);
+
         float timer = duration;
 
         while (timer > 0)
@@ -128,8 +154,15 @@ public class PlayerAttackController : MonoBehaviour
             {
                 if (hits[i].attachedRigidbody != null)
                 {
-                    hits[i].GetComponent<Health>().Hit(1, transform.position);
-                    hits[i].GetComponent<EnemyHealth>().HitByPlayer = true;
+                    EnemyHealth h = hits[i].GetComponent<EnemyHealth>();
+
+                    if (!h.died) {
+                        Instantiate(hitParticles, hits[i].attachedRigidbody.transform.position, Quaternion.identity);
+                        StartCoroutine(HitVFX());
+                    } 
+
+                    h.Hit(1, transform.position);
+                    h.HitByPlayer = true;
                 }
             }
 
@@ -138,7 +171,7 @@ public class PlayerAttackController : MonoBehaviour
             yield return null;
         }
 
-        airAttackIndicator.enabled = false;
+        //airAttackIndicator.enabled = false;
     }
 
     private void OnDrawGizmos()
@@ -153,5 +186,15 @@ public class PlayerAttackController : MonoBehaviour
 
         Gizmos.color = Color.white;
         Gizmos.DrawRay(new Ray(transform.position, new Vector3(direction, 0)));
+    }
+
+    private IEnumerator HitVFX() {
+        float time = 0.000001f;
+
+        Time.timeScale = 0.00001f;
+
+        yield return new WaitForSeconds(time);
+
+        Time.timeScale = 1;
     }
 }
