@@ -81,6 +81,7 @@ public class MovementController : StateMachine
     {
         // Improve Camera Behaviour
         c.transform.position = Vector3.SmoothDamp(c.transform.position, new Vector3(rb.transform.position.x, rb.transform.position.y + 0.6f, -10), ref camVelocity, 0.068f);
+        c.transform.rotation = Quaternion.Slerp(c.transform.rotation, Quaternion.Euler(new Vector3(0, 0, 0)), Time.deltaTime * 4);
 
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         inputting = input != new Vector2(0, 0);
