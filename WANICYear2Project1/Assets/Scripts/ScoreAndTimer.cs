@@ -28,14 +28,19 @@ public class ScoreAndTimer : MonoBehaviour
         Singleton = this;
         text2.gameObject.SetActive(false);
         EnemySpawner = GetComponent<EnemySpawner>();
+        HighScore = GameObject.FindGameObjectWithTag("ScoreKeeper").GetComponent<ScoreKeeper>().Highscore;
     }
     internal void Die()
     {
+        PossibleScore = PossibleScore * Multiplier;
+        currentScore += PossibleScore;
         if(currentScore > HighScore)
         {
             HighScore = currentScore;
         }
         ScoreTXT.text = "Score: " + currentScore + " HighScore: " + HighScore;
+       GameObject.FindGameObjectWithTag("ScoreKeeper").GetComponent<ScoreKeeper>().Highscore = HighScore;
+
     }
     internal void GainPoints(int points)
     {

@@ -1373,9 +1373,9 @@ MonoBehaviour:
   AttackTime: 3
   MaxAttackTime: 100
   Stamina: 100
-  staminaGain: 0.3
+  staminaGain: 0.1
   MainAttackLoss: 40
-  HeavyAttackLoss: 25
+  HeavyAttackLoss: 60
   attackthreshold: 25
 --- !u!114 &529598071
 MonoBehaviour:
@@ -2410,7 +2410,7 @@ GameObject:
   - component: {fileID: 801511776}
   - component: {fileID: 801511775}
   m_Layer: 5
-  m_Name: Resume (1)
+  m_Name: StartMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2449,7 +2449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d071c93f9edc949830e0d337c7ced5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: MainMenu
+  sceneName: StartMenu
   WinningText: {fileID: 0}
 --- !u!114 &801511776
 MonoBehaviour:
