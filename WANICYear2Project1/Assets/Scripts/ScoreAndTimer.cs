@@ -40,7 +40,7 @@ public class ScoreAndTimer : MonoBehaviour
         }
         ScoreTXT.text = "Score: " + currentScore + " HighScore: " + HighScore;
        GameObject.FindGameObjectWithTag("ScoreKeeper").GetComponent<ScoreKeeper>().Highscore = HighScore;
-
+        Time.timeScale = 0f;
     }
     internal void GainPoints(int points)
     {
