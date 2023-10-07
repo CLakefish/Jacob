@@ -410,8 +410,8 @@ MonoBehaviour:
   moveSpeed: 8
   groundAcceleration: 0.1
   groundDeceleration: 0.1
-  airAcceleration: 0.1
-  airDeceleration: 0.1
+  airAcceleration: 1
+  airDeceleration: 1
   jumpForce: 10.8
   jumpStartBoost: 2
   jumpCancelSpeed: 0.06
@@ -488,8 +488,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundAttackRadius: 1.25
   airAttackRadius: 1
-  groundAttackIndicator: {fileID: 4184009830765580639}
-  airAttackIndicator: {fileID: 8059275352264928833}
+  sword: {fileID: 0}
+  hitParticles: {fileID: 0}
   AttackSlider: {fileID: 0}
   AttackTime: 0
   MaxAttackTime: 0

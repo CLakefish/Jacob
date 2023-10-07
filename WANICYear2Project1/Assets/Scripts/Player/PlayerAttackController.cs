@@ -189,7 +189,14 @@ public class PlayerAttackController : MonoBehaviour
     }
 
     private IEnumerator HitVFX() {
-        float time = 0.000001f;
+
+        for (int i = 0; i < 5; i++)
+        {
+            Camera.main.transform.eulerAngles += new Vector3(0, 0, Random.insideUnitCircle.y);
+            yield return new WaitForSeconds(0.001f);
+        }
+
+        float time = 0.0000005f;
 
         Time.timeScale = 0.00001f;
 
