@@ -17426,6 +17426,37 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &2120368565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2120368566}
+  m_Layer: 0
+  m_Name: HealthTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2120368566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120368565}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.620813, y: -4.51, z: -0.07820173}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8019600805411081758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17515,6 +17546,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: HealthPrefab
+      value: 
+      objectReference: {fileID: 3449297787739551658, guid: cf3da36006357ff41a3b378491eef887, type: 3}
+    - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: DifficultyText
       value: 
       objectReference: {fileID: 456239807}
@@ -17522,6 +17557,10 @@ PrefabInstance:
       propertyPath: DifficultyText2
       value: 
       objectReference: {fileID: 12614604}
+    - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: HealthTransform
+      value: 
+      objectReference: {fileID: 2120368566}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17544,3 +17583,4 @@ SceneRoots:
   - {fileID: 182383318}
   - {fileID: 1040836829}
   - {fileID: 905690119}
+  - {fileID: 2120368566}

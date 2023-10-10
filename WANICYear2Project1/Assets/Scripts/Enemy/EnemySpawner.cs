@@ -24,6 +24,9 @@ public class EnemySpawner : MonoBehaviour
 
     public TMP_Text DifficultyText;
     public TMP_Text DifficultyText2;
+
+    public GameObject HealthPrefab;
+    public Transform HealthTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +70,7 @@ public class EnemySpawner : MonoBehaviour
         EnemiesPerSpawn++;
         RaiseValue = 10 * DifficultyRate *DifficultyRate;
         EnemiesKilledPerRaise = 0;
+        Instantiate(HealthPrefab, HealthTransform);
     }
     private void SpawnEnemy()
     {
