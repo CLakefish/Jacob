@@ -371,6 +371,8 @@ MonoBehaviour:
   DifficultyRate: 1
   DifficultyText: {fileID: 0}
   DifficultyText2: {fileID: 0}
+  HealthPrefab: {fileID: 3449297787739551658, guid: cf3da36006357ff41a3b378491eef887, type: 3}
+  HealthTransform: {fileID: 0}
 --- !u!114 &7347629140448867379
 MonoBehaviour:
   m_ObjectHideFlags: 0

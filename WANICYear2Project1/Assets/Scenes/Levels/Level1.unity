@@ -17546,10 +17546,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
-      propertyPath: HealthPrefab
-      value: 
-      objectReference: {fileID: 3449297787739551658, guid: cf3da36006357ff41a3b378491eef887, type: 3}
-    - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: DifficultyText
       value: 
       objectReference: {fileID: 456239807}
