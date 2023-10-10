@@ -94,7 +94,7 @@ public class MovementController : StateMachine
 
         rb.velocity = Vector2.SmoothDamp(rb.velocity, moveDir, ref currentVelocity, velocityChange);
 
-        visual.flipX = rb.velocity.x != 0 && Mathf.Sign(rb.velocity.x) == -1;
+        visual.flipX = rb.velocity.x != 0 && Mathf.Sign(rb.velocity.x) == 1;
 
         base.Update();
     }
