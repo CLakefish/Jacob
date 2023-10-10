@@ -59,6 +59,12 @@ public class PlayerHealth : Health
         currentHealth = maxHealth;
         HealthBar.value = maxHealth;
     }
+    public void AddHealth()
+    {
+        maxHealth++;
+        currentHealth = maxHealth;
+        HealthBar.value = maxHealth;
+    }
 }
 
 

@@ -26,7 +26,7 @@ public class PlayerAttackController : MonoBehaviour
     [Tooltip("slider for Stamina")] public Slider AttackSlider;
     private float SpentAttack;
     [Tooltip("time until Stamina increases faster")] public int AttackTime;
-    [Tooltip("MaxStamina")] public int MaxAttackTime;
+    [Tooltip("MaxStamina")] public int MaxStamina;
     [Tooltip("stamina")] public float Stamina;
     [Tooltip("stamina gained per second")] public float staminaGain;
     [Tooltip("Main attack Stamina Loss")] public int MainAttackLoss;
@@ -39,8 +39,8 @@ public class PlayerAttackController : MonoBehaviour
         maskEnemy = LayerMask.GetMask("Enemy");
         //groundAttackIndicator.size = 2 * groundAttackRadius * Vector2.one;
         //airAttackIndicator.size = 2 * airAttackRadius * Vector2.one;
-        AttackSlider.maxValue = MaxAttackTime;
-        AttackSlider.value = MaxAttackTime;
+        AttackSlider.maxValue = MaxStamina;
+        AttackSlider.value = MaxStamina;
     }
 
     void Update()
@@ -54,7 +54,7 @@ public class PlayerAttackController : MonoBehaviour
             direction = (int)Mathf.Sign(rb.velocity.x);
         }
 
-        if(Stamina < MaxAttackTime) //if you dont have full stamina
+        if(Stamina < MaxStamina) //if you dont have full stamina
         {
             if(SpentAttack > 0)
             {
@@ -69,7 +69,7 @@ public class PlayerAttackController : MonoBehaviour
         }
         else
         {
-            Stamina = MaxAttackTime;
+            Stamina = MaxStamina;
         }
 
         AttackSlider.value = Stamina;
@@ -102,6 +102,11 @@ public class PlayerAttackController : MonoBehaviour
     {
         Stamina -= Loss;
         SpentAttack = AttackTime;
+    }
+    public void StaminaGain()
+    {
+        MaxStamina += 25;
+        AttackSlider.maxValue = MaxStamina;
     }
     IEnumerator GroundAttack(float duration)
     {
