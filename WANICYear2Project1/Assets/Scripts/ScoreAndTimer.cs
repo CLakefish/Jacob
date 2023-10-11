@@ -10,7 +10,7 @@ public class ScoreAndTimer : MonoBehaviour
     [SerializeField] private TMP_Text text2;
     [SerializeField] private TMP_Text HighScoreText;
     public static ScoreAndTimer Singleton;
-    public float currentScore { get; private set; }
+    public float currentScore { get; set; }
 
 
     public float HighScore;
