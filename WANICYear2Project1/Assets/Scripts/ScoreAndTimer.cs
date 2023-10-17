@@ -9,9 +9,11 @@ public class ScoreAndTimer : MonoBehaviour
     [SerializeField] private TMP_Text text;
     [SerializeField] private TMP_Text text2;
     [SerializeField] private TMP_Text HighScoreText;
+    [SerializeField] public TMP_Text CoinTXT;
+
     public static ScoreAndTimer Singleton;
     public float currentScore { get; set; }
-
+    public int CoinValue;
 
     public float HighScore;
     public float PossibleScore;
@@ -29,6 +31,7 @@ public class ScoreAndTimer : MonoBehaviour
         text2.gameObject.SetActive(false);
         EnemySpawner = GetComponent<EnemySpawner>();
         HighScore = GameObject.FindGameObjectWithTag("ScoreKeeper").GetComponent<ScoreKeeper>().Highscore;
+        CoinValue = 0;
     }
     internal void Die()
     {
@@ -76,5 +79,5 @@ public class ScoreAndTimer : MonoBehaviour
         Multiplier++;
         timer = MulitplierTimer;
         EnemySpawner.EnemiesKilledPerRaise++;
-    }
+   }
 }

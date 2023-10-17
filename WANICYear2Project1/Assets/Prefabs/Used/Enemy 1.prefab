@@ -205,6 +205,9 @@ MonoBehaviour:
   invulnerabilityTime: 0
   HitByPlayer: 0
   died: 0
+  Coin: {fileID: 5235106086704870672, guid: 147bfbcee9bc0a447823a99780fb392c, type: 3}
+  MaxCoinsPerDeath: 5
+  CoinSprayForce: 2
 --- !u!95 &7430316023264947654
 Animator:
   serializedVersion: 5
