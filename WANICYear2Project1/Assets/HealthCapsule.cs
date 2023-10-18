@@ -15,7 +15,7 @@ public class HealthCapsule : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.GetComponent<PlayerHealth>().GainHealth();
-            Destroy(this);
+            Destroy(gameObject);
         }
         
     }

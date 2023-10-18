@@ -11,10 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level1.unity
     guid: 640547840e16835498923e58ee3df898
-  - enabled: 0
-    path: Assets/Scenes/ZakTesting.unity
-    guid: 7ad2cdc649010c34796e19a67be42162
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level0.unity
+    guid: 187d580cda2b80340995ba4982a6b11e
   - enabled: 1
     path: Assets/Scenes/Main/StartMenu.unity
     guid: dec92a0f391bda04384fd24ad83f4b93
+  - enabled: 0
+    path: Assets/Scenes/ZakTesting.unity
+    guid: 7ad2cdc649010c34796e19a67be42162
   m_configObjects: {}
