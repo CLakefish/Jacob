@@ -306,7 +306,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -1981666837, guid: f5b30ddf8efc65447a7fbb4b65fb9642, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -461,6 +461,8 @@ MonoBehaviour:
   DifficultyRate: 1
   DifficultyText: {fileID: 0}
   DifficultyText2: {fileID: 0}
+  HealthPrefab: {fileID: 0}
+  HealthTransform: {fileID: 0}
 --- !u!114 &7742839875328092031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,7 +494,7 @@ MonoBehaviour:
   hitParticles: {fileID: 0}
   AttackSlider: {fileID: 0}
   AttackTime: 0
-  MaxAttackTime: 0
+  MaxStamina: 0
   Stamina: 0
   staminaGain: 0
   MainAttackLoss: 0
@@ -513,6 +515,8 @@ MonoBehaviour:
   text: {fileID: 0}
   text2: {fileID: 0}
   HighScoreText: {fileID: 0}
+  CoinTXT: {fileID: 0}
+  CoinValue: 0
   HighScore: 0
   PossibleScore: 0
   Multiplier: 0

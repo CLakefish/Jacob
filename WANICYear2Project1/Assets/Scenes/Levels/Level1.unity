@@ -17749,6 +17749,10 @@ PrefabInstance:
       propertyPath: HeavyAttackLoss
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 839343804155604291, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1981666837, guid: f5b30ddf8efc65447a7fbb4b65fb9642, type: 3}
     - target: {fileID: 1733015436055954298, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
