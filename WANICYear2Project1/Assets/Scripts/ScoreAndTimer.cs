@@ -30,6 +30,7 @@ public class ScoreAndTimer : MonoBehaviour
         Singleton = this;
         text2.gameObject.SetActive(false);
         EnemySpawner = GetComponent<EnemySpawner>();
+        if(GameObject.FindGameObjectWithTag("ScoreKeeper"))
         HighScore = GameObject.FindGameObjectWithTag("ScoreKeeper").GetComponent<ScoreKeeper>().Highscore;
         CoinValue = 0;
     }
