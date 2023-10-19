@@ -14,18 +14,19 @@ public class PlayerHealth : Health
 {
     private Rigidbody2D rb;
      [SerializeField] public Slider HealthBar;
+    [SerializeField] private Image HitEffect;
 
     public GameObject DeathPanel;
     // When the player dies
     protected override void OnDeath()
     {
+        if (DeathPanel.activeSelf) return;
+
         //Destroy(gameObject);
         HealthBar.value = 0;
         HealthBar.fillRect.gameObject.SetActive(false);
         DeathPanel.SetActive(true);
         ScoreAndTimer.Singleton.Die();
-        Time.timeScale = 0;
-
     }
 
     // When the player is hit
@@ -33,6 +34,7 @@ public class PlayerHealth : Health
     {
         rb.velocity = new Vector2(0, 0);
         rb.AddForce(Vector2.up * 12, ForceMode2D.Impulse);
+        HitEffect.color = new Color(1, 0, 0, 0.4f);
         HealthBar.value = currentHealth;
     }
 
@@ -52,7 +54,7 @@ public class PlayerHealth : Health
             //Hit();
         }
 
-
+        if (HitEffect != null) HitEffect.color = new Color(1, 0, 0, HitEffect.color.a - (2 * Time.deltaTime));
     }
     public void GainHealth()
     {
