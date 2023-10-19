@@ -32,6 +32,13 @@ public class Scene : MonoBehaviour
     {
         Application.Quit();
     }
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.R))
+        {
+            ChangeScene();
+        }
+    }
 
 
 }
