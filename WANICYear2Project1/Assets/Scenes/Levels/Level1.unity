@@ -17960,6 +17960,10 @@ PrefabInstance:
       propertyPath: HeavyAttackLoss
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 764410133995581189, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: attackthreshold
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 839343804155604291, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: m_Sprite
       value: 
