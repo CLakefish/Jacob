@@ -905,7 +905,7 @@ GameObject:
   - component: {fileID: 473631535}
   - component: {fileID: 473631534}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: DEATHSCORETXT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -927,7 +927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -39, y: 158}
+  m_AnchoredPosition: {x: -139, y: 158}
   m_SizeDelta: {x: 629.5968, y: 67.184}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &473631534
@@ -984,7 +984,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2805,7 +2805,6 @@ RectTransform:
   - {fileID: 376383774}
   - {fileID: 1868147555}
   - {fileID: 1829341237}
-  - {fileID: 1423785491}
   - {fileID: 473631533}
   m_Father: {fileID: 905690119}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4159,16 +4158,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423785490}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 982322841}
+  m_Father: {fileID: 1829341237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 250}
+  m_AnchoredPosition: {x: 0, y: 6.700012}
   m_SizeDelta: {x: 376.9772, y: 70.9745}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1423785492
@@ -14708,7 +14707,7 @@ GameObject:
   - component: {fileID: 1829341240}
   - component: {fileID: 1829341239}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: YOUDIEDTXT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14725,7 +14724,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1423785491}
   m_Father: {fileID: 982322841}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -18156,6 +18156,14 @@ PrefabInstance:
       objectReference: {fileID: 857143362}
     - target: {fileID: 2769745135436596887, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: ScoreTXT
+      value: 
+      objectReference: {fileID: 473631534}
+    - target: {fileID: 2769745135436596887, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: Scoretext
+      value: 
+      objectReference: {fileID: 1263501165}
+    - target: {fileID: 2769745135436596887, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: DeathScoreTXT
       value: 
       objectReference: {fileID: 473631534}
     - target: {fileID: 2769745135436596887, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}

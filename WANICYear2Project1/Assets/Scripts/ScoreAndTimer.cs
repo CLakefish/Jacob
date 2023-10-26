@@ -6,8 +6,7 @@ using UnityEngine;
 public class ScoreAndTimer : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private TMP_Text text;
-    [SerializeField] private TMP_Text text2;
+    [SerializeField] private TMP_Text Scoretext;
     [SerializeField] private TMP_Text HighScoreText;
     [SerializeField] public TMP_Text CoinTXT;
 
@@ -20,14 +19,14 @@ public class ScoreAndTimer : MonoBehaviour
     public float MulitplierTimer;
     private float timer = 0;
 
-    public TMP_Text ScoreTXT;
+    public TMP_Text DeathScoreTXT;
+    //work
 
     EnemySpawner EnemySpawner;
 
     void Start()
     {
         Singleton = this;
-        text2.gameObject.SetActive(false);
         EnemySpawner = GetComponent<EnemySpawner>();
         if(GameObject.FindGameObjectWithTag("ScoreKeeper"))
         HighScore = GameObject.FindGameObjectWithTag("ScoreKeeper").GetComponent<ScoreKeeper>().Highscore;
@@ -39,7 +38,7 @@ public class ScoreAndTimer : MonoBehaviour
         {
             HighScore = currentScore;
         }
-        ScoreTXT.text = "Score: " + currentScore + " HighScore: " + HighScore;
+        DeathScoreTXT.text = "Score: " + currentScore + " HighScore: " + HighScore;
         GameObject.FindGameObjectWithTag("ScoreKeeper").GetComponent<ScoreKeeper>().Highscore = HighScore;
         Time.timeScale = 0f;
     }
@@ -53,7 +52,7 @@ public class ScoreAndTimer : MonoBehaviour
     void Update()
     {
         //constanty update Timer and Score
-        text.text = "Score: " + currentScore;
+        Scoretext.text = "Score: " + currentScore;
         HighScoreText.text = "H: " + HighScore;
     }
 }
