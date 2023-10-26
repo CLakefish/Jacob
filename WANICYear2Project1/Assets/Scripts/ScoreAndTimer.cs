@@ -16,7 +16,6 @@ public class ScoreAndTimer : MonoBehaviour
     public int CoinValue;
 
     public float HighScore;
-    public float PossibleScore;
     public float Multiplier;
     public float MulitplierTimer;
     private float timer = 0;
@@ -36,20 +35,17 @@ public class ScoreAndTimer : MonoBehaviour
     }
     internal void Die()
     {
-        PossibleScore = PossibleScore * Multiplier;
-        currentScore += PossibleScore;
         if(currentScore > HighScore)
         {
             HighScore = currentScore;
         }
         ScoreTXT.text = "Score: " + currentScore + " HighScore: " + HighScore;
-       GameObject.FindGameObjectWithTag("ScoreKeeper").GetComponent<ScoreKeeper>().Highscore = HighScore;
+        GameObject.FindGameObjectWithTag("ScoreKeeper").GetComponent<ScoreKeeper>().Highscore = HighScore;
         Time.timeScale = 0f;
     }
     internal void GainPoints(int points)
     {
-        PossibleScore += points * EnemySpawner.DifficultyRate;
-        timer = MulitplierTimer;
+        currentScore += points * EnemySpawner.DifficultyRate;
         EnemySpawner.EnemiesKilledPerRaise++;
     }
 
@@ -58,27 +54,6 @@ public class ScoreAndTimer : MonoBehaviour
     {
         //constanty update Timer and Score
         text.text = "Score: " + currentScore;
-        if(timer >= 0)
-        {
-            timer -= Time.deltaTime;
-            text2.gameObject.SetActive(true);
-            text2.text = PossibleScore + "*" + Multiplier;
-            
-        } 
-        else if(PossibleScore > 0)
-        {
-            currentScore += PossibleScore * Multiplier;
-            PossibleScore = 0;
-            Multiplier = 1;
-            text2.gameObject.SetActive(false);
-        }
         HighScoreText.text = "H: " + HighScore;
     }
-
-   internal void multiplyChain()
-   {
-        Multiplier++;
-        timer = MulitplierTimer;
-        EnemySpawner.EnemiesKilledPerRaise++;
-   }
 }

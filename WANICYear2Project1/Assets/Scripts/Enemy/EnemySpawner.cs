@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour
     public Vector2 RightSpawnPoint;
 
     public int EnemiesPerSpawn;
+    private bool EnemiesCanSpawn;
 
     private float SpawnRate;
     public float MaxSpawnRate;
@@ -20,13 +21,17 @@ public class EnemySpawner : MonoBehaviour
     public int EnemiesKilledPerRaise;
     public float RaiseValue;
 
+    public float WaveBufferTime;
+    private float waveBuffer;
+    public TMP_Text WaveTXT;
+
     public float DifficultyRate;
 
     public TMP_Text DifficultyText;
-    public TMP_Text DifficultyText2;
+    public TMP_Text EnemyTXT;
 
-    public GameObject HealthPrefab;
-    public Transform HealthTransform;
+    public GameObject[] PowerupPrefabs;
+    public Transform PowerupTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,10 +41,40 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //for every nth second, spawn an enemy at a random point inbetween min spawn distance and max spawn distance, reset spawn rate;
-        if(SpawnRate < 0)
+
+        if(EnemiesCanSpawn)
         {
-            for(int i = 0; i < EnemiesPerSpawn; i++)
+            EnemySpawners();
+        }
+
+        if(waveBuffer < 0)
+        {
+            EnemiesCanSpawn = true;
+            WaveTXT.gameObject.SetActive(false);
+        }
+        else
+        {
+            waveBuffer -=1 * Time.deltaTime;
+            EnemiesCanSpawn = false;
+            WaveTXT.gameObject.SetActive(true);
+            WaveTXT.text = "Wave starts in: " + System.Math.Round(waveBuffer);
+        }
+
+        if (EnemiesKilledPerRaise >= RaiseValue)
+        {
+            IncreaseDifficulty();
+        }
+        DifficultyText.text = "S: " + DifficultyRate + "x";
+        EnemyTXT.text = "E: " + Mathf.Round(RaiseValue - EnemiesKilledPerRaise);
+
+    }
+
+    public void EnemySpawners()
+    {
+        //for every nth second, spawn an enemy at a random point inbetween min spawn distance and max spawn distance, reset spawn rate;
+        if (SpawnRate < 0)
+        {
+            for (int i = 0; i < EnemiesPerSpawn; i++)
             {
                 SpawnEnemy();
             }
@@ -50,17 +85,11 @@ public class EnemySpawner : MonoBehaviour
         {
             SpawnRate = SpawnRate - 1 * Time.deltaTime;
         }
-        if(EnemiesKilledPerRaise > RaiseValue)
-        {
-            IncreaseDifficulty();
-        }
-        DifficultyText.text = "S: " + DifficultyRate + "x";
-        DifficultyText2.text = "E: " + Mathf.Round(RaiseValue - EnemiesKilledPerRaise);
-
     }
 
     private void IncreaseDifficulty()
     {
+        waveBuffer = WaveBufferTime;
         if (DifficultyRate < 4) //makes certain that no matter what the gmae will only take away atleast 4 seconds from the spawn rate. set ACTUAL spawn rate to be greater than 8.
         {
             MaxSpawnRate -= 0.5f;
@@ -70,7 +99,7 @@ public class EnemySpawner : MonoBehaviour
         EnemiesPerSpawn++;
         RaiseValue = 10 * DifficultyRate *DifficultyRate;
         EnemiesKilledPerRaise = 0;
-        Instantiate(HealthPrefab, HealthTransform);
+        Instantiate(PowerupPrefabs[Random.Range(0, PowerupPrefabs.Length)], PowerupTransform);
     }
     private void SpawnEnemy()
     {

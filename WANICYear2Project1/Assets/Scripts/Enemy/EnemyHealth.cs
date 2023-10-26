@@ -52,9 +52,7 @@ public class EnemyHealth : Health
 
             if (HitByPlayer)
                 ScoreAndTimer.Singleton.GainPoints(10);
-            else
-                ScoreAndTimer.Singleton.multiplyChain();
-
+            
             Destroy(gameObject);
         }
 

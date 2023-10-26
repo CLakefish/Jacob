@@ -209,4 +209,12 @@ public class PlayerAttackController : MonoBehaviour
 
         Time.timeScale = 1;
     }
+
+    public void GainStamina()
+    {
+        MaxStamina++;
+        Stamina = MaxStamina;
+        AttackSlider.maxValue++;
+        AttackSlider.value = MaxStamina;
+    }
 }
