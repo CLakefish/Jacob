@@ -17945,8 +17945,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 764410133995581189, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: Stamina
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 764410133995581189, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: MaxStamina
-      value: 100
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 764410133995581189, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: staminaGain
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 764410133995581189, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: AttackSlider
@@ -17954,15 +17962,15 @@ PrefabInstance:
       objectReference: {fileID: 2097282718}
     - target: {fileID: 764410133995581189, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: MainAttackLoss
-      value: 25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 764410133995581189, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: HeavyAttackLoss
-      value: 40
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 764410133995581189, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: attackthreshold
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 839343804155604291, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: m_Sprite
@@ -18032,6 +18040,26 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 770609637}
+    - target: {fileID: 6492440856072771923, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.053542722
+      objectReference: {fileID: 0}
+    - target: {fileID: 6492440856072771923, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.053542722
+      objectReference: {fileID: 0}
+    - target: {fileID: 6492440856072771923, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.053542722
+      objectReference: {fileID: 0}
+    - target: {fileID: 6492440856072771923, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6492440856072771923, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.51
+      objectReference: {fileID: 0}
     - target: {fileID: 7137935305223482080, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: HealthBar
       value: 
@@ -18057,22 +18085,65 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: WaveTXT
+      value: 
+      objectReference: {fileID: 8019600805411081759}
+    - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: EnemyTXT
+      value: 
+      objectReference: {fileID: 12614604}
+    - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: DifficultyText
       value: 
       objectReference: {fileID: 456239807}
+    - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: WaveBufferTime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: DifficultyText2
       value: 
       objectReference: {fileID: 12614604}
     - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: EnemiesPerSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: HealthTransform
       value: 
       objectReference: {fileID: 2120368566}
+    - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: PowerupTransform
+      value: 
+      objectReference: {fileID: 2120368566}
+    - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: PowerupPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: PowerupPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 3449297787739551658, guid: cf3da36006357ff41a3b378491eef887, type: 3}
+    - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: PowerupPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 3449297787739551658, guid: 54b39f097cfcce34f9d1e39f6b2910d4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+--- !u!114 &8019600805411081759 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7876365173773704542, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+  m_PrefabInstance: {fileID: 8019600805411081758}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
