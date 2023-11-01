@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class RandomCapsule : MonoBehaviour
 {
+    public GameObject AudioObject;
+
+    public AudioClip myAudio;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             RandomEvent(collision.gameObject);
+            GameObject clone = Instantiate(AudioObject);
+            clone.transform.parent = null;
+            clone.GetComponent<AudioObjectScript>().PlayAudio(myAudio);
             Destroy(gameObject);
         }
     }

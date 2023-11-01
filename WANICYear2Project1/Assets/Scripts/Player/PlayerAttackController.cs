@@ -22,6 +22,8 @@ public class PlayerAttackController : MonoBehaviour
     Rigidbody2D rb;
     MovementController movementController;
     int maskEnemy;
+    public AudioSource Source;
+    public AudioClip attackClip;
 
     [Tooltip("slider for Stamina")] public Slider AttackSlider;
     private float SpentAttack;
@@ -35,6 +37,7 @@ public class PlayerAttackController : MonoBehaviour
     void Start()
     {
         movementController = GetComponent<MovementController>();
+        Source = GetComponent<PlayerHealth>().myAud;
         rb = GetComponent<Rigidbody2D>();
         maskEnemy = LayerMask.GetMask("Enemy");
         //groundAttackIndicator.size = 2 * groundAttackRadius * Vector2.one;
@@ -42,21 +45,11 @@ public class PlayerAttackController : MonoBehaviour
         AttackSlider.maxValue = MaxStamina;
         AttackSlider.value = MaxStamina;
     }
-
-    void Update()
+    private void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0) && Stamina >= attackthreshold)
+        if (Stamina < MaxStamina) //if you dont have full stamina
         {
-            Attack();
-        }
-        if (Input.GetAxisRaw("Horizontal") != 0)
-        {
-            direction = (int)Mathf.Sign(rb.velocity.x);
-        }
-
-        if(Stamina < MaxStamina) //if you dont have full stamina
-        {
-            if(SpentAttack > 0)
+            if (SpentAttack > 0)
             {
                 Stamina += staminaGain;
                 SpentAttack -= Time.deltaTime;
@@ -71,6 +64,18 @@ public class PlayerAttackController : MonoBehaviour
         {
             Stamina = MaxStamina;
         }
+    }
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && Stamina >= attackthreshold)
+        {
+            Attack();
+        }
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            direction = (int)Mathf.Sign(rb.velocity.x);
+        }
+
 
         AttackSlider.value = Stamina;
     }
@@ -82,6 +87,8 @@ public class PlayerAttackController : MonoBehaviour
         swordObj = Instantiate(sword, transform, false);
         swingCount++;
         swingCount %= 2;
+
+        Source.PlayOneShot(attackClip);
 
         SpriteRenderer swordSprite = swordObj.GetComponent<SpriteRenderer>();
         swordSprite.flipX = direction != 1;

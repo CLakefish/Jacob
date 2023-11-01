@@ -12,8 +12,15 @@ public class EnemyHealth : Health
     public GameObject Coin;
     public int MaxCoinsPerDeath;
     public int CoinSprayForce;
+
+    public AudioSource myAud;
+    public AudioClip myAudio;
     protected override void OnDeath()
     {
+        if(!died)
+        {
+            myAud.PlayOneShot(myAudio);
+        }
         reference.ChangeState(reference.Knockback);
         StartCoroutine(Death());
     }
@@ -21,6 +28,8 @@ public class EnemyHealth : Health
     protected override void OnHit()
     {
         reference.ChangeState(reference.Knockback);
+        
+
         return;
     }
 
@@ -29,6 +38,9 @@ public class EnemyHealth : Health
         reference = GetComponent<Basic>();
         HitByPlayer = false;
         died = false;
+        
+       // myAud = GetComponent<AudioSource>();
+        
     }
 
     private IEnumerator Death()

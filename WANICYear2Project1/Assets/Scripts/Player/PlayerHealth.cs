@@ -13,7 +13,9 @@ using UnityEngine.UI;
 public class PlayerHealth : Health
 {
     private Rigidbody2D rb;
-     [SerializeField] public Slider HealthBar;
+    public AudioSource myAud;
+    public AudioClip myHurtClip;
+    [SerializeField] public Slider HealthBar;
     [SerializeField] private Image HitEffect;
 
     public GameObject DeathPanel;
@@ -36,6 +38,7 @@ public class PlayerHealth : Health
         rb.AddForce(Vector2.up * 12, ForceMode2D.Impulse);
         HitEffect.color = new Color(1, 0, 0, 0.4f);
         HealthBar.value = currentHealth;
+        myAud.PlayOneShot(myHurtClip);
     }
 
 

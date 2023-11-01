@@ -48,6 +48,8 @@ public class Basic : StateMachine
     internal int knockBackCount;
 
     public bool Grounded;
+    public AudioClip MyClip;
+    public AudioSource Source;
 
     new void Start()
     {
@@ -55,13 +57,16 @@ public class Basic : StateMachine
         player = FindObjectOfType<MovementController>();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        Source = GetComponent<AudioSource>();
+
 
         Searching = new(this);
         Attacking = new(this);
         Knockback = new(this);
 
         moveSpeed -= Random.Range(-2f, 2f);
-
+        Attacking.myAudio = MyClip;
+        Attacking.myAud = Source;
         base.Start();
     }
 
@@ -113,6 +118,7 @@ public class Searching : BaseEnemyState
         {
             Enemy.previousAttackTime = Time.time;
             Enemy.ChangeState(Enemy.Attacking);
+
             return;
         }
     }
@@ -142,9 +148,11 @@ public class Searching : BaseEnemyState
 public class Attacking : BaseEnemyState
 {
     private bool hasHit = false;
+    public AudioSource myAud;
+    public AudioClip myAudio;
 
     public Attacking(Basic enemy) : base(enemy) { }
-
+    
     public override void Enter()
     {
         Enemy.previousAttackTime = Time.time;
@@ -157,6 +165,8 @@ public class Attacking : BaseEnemyState
         if (Time.time >= Enemy.previousAttackTime + Enemy.attackTime)
         {
             Enemy.ChangeState(Enemy.Searching);
+            myAud.GetComponent<AudioSource>().PlayOneShot(myAudio);
+
             return;
         }
 
@@ -165,7 +175,6 @@ public class Attacking : BaseEnemyState
             Debug.Log("o");
             Enemy.animator.SetBool("Swinging", true);
             RaycastHit2D player = Physics2D.BoxCast(Enemy.transform.position, Vector3.one * 1.1f, 0, new Vector2(Mathf.Sign(Enemy.player.transform.position.x - Enemy.rb.transform.position.x), 0), 1.8f, Enemy.attackLayer);
-
             if (player.collider != null)
             {
                 Enemy.animator.SetBool("Hit", true);
