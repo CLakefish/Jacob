@@ -23882,21 +23882,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 764410133995581189, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
-      propertyPath: MaxStamina
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 764410133995581189, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: AttackSlider
       value: 
       objectReference: {fileID: 2097282718}
-    - target: {fileID: 764410133995581189, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
-      propertyPath: MainAttackLoss
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 764410133995581189, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
-      propertyPath: HeavyAttackLoss
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 1733015436055954298, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.39

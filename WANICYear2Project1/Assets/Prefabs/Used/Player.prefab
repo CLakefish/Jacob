@@ -414,7 +414,7 @@ MonoBehaviour:
   attackClip: {fileID: 8300000, guid: 489a9115901fdb549802313c0878ae37, type: 3}
   AttackSlider: {fileID: 0}
   AttackTime: 3
-  MaxStamina: 5
+  MaxStamina: 10
   Stamina: 5
   staminaGain: 0.03
   MainAttackLoss: 1
