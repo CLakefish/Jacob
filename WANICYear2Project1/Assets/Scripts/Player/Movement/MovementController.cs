@@ -76,7 +76,11 @@ public class MovementController : StateMachine
         rb = GetComponent<Rigidbody2D>();
         col = rb.GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
-        playerCamera = FindObjectOfType<Camera>();
+        playerCamera = Camera.main;
+        if (playerCamera == null)
+        {
+            playerCamera = FindObjectOfType<Camera>();
+        }
 
         base.Start();
     }

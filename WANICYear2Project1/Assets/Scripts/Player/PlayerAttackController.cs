@@ -117,8 +117,6 @@ public class PlayerAttackController : MonoBehaviour
     }
     IEnumerator GroundAttack(float duration)
     {
-        //groundAttackIndicator.flipX = direction == 1;
-        //groundAttackIndicator.enabled = true;
         Destroy(swordObj, duration);
 
         float timer = duration;
@@ -147,12 +145,9 @@ public class PlayerAttackController : MonoBehaviour
             timer -= Time.deltaTime;
             yield return null;
         }
-        
-        //groundAttackIndicator.enabled = false;
     }
     IEnumerator AirAttack(float duration)
     {
-        //airAttackIndicator.enabled = true;
         swordObj.GetComponent<Animator>().SetBool("Air", true);
         Destroy(swordObj, duration);
 
@@ -182,8 +177,6 @@ public class PlayerAttackController : MonoBehaviour
 
             yield return null;
         }
-
-        //airAttackIndicator.enabled = false;
     }
 
     private void OnDrawGizmos()
@@ -208,11 +201,11 @@ public class PlayerAttackController : MonoBehaviour
             yield return new WaitForSeconds(0.001f);
         }
 
-        float time = 0.0000005f;
+        float time = 0.1f;
 
-        Time.timeScale = 0.00001f;
+        Time.timeScale = 0;
 
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSecondsRealtime(time);
 
         Time.timeScale = 1;
     }

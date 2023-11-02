@@ -20,7 +20,6 @@ public class ScoreAndTimer : MonoBehaviour
     private float timer = 0;
 
     public TMP_Text DeathScoreTXT;
-    //work
 
     EnemySpawner EnemySpawner;
 
@@ -28,18 +27,17 @@ public class ScoreAndTimer : MonoBehaviour
     {
         Singleton = this;
         EnemySpawner = GetComponent<EnemySpawner>();
-        if(GameObject.FindGameObjectWithTag("ScoreKeeper"))
-        HighScore = GameObject.FindGameObjectWithTag("ScoreKeeper").GetComponent<ScoreKeeper>().Highscore;
         CoinValue = 0;
+        HighScore = FindObjectOfType<ScoreKeeper>().Highscore;
     }
     internal void Die()
     {
-        if(currentScore > HighScore)
+        if (currentScore > HighScore)
         {
             HighScore = currentScore;
+            FindObjectOfType<ScoreKeeper>().Highscore = HighScore;
         }
         DeathScoreTXT.text = "Score: " + currentScore + " HighScore: " + HighScore;
-        GameObject.FindGameObjectWithTag("ScoreKeeper").GetComponent<ScoreKeeper>().Highscore = HighScore;
         Time.timeScale = 0f;
     }
     internal void GainPoints(int points)

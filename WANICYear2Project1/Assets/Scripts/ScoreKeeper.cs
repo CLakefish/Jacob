@@ -6,15 +6,13 @@ public class ScoreKeeper : MonoBehaviour
 {
 
     public float Highscore;
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        ScoreKeeper scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        if (scoreKeeper && scoreKeeper != this)
+        {
+            Destroy(gameObject);
+        }
         DontDestroyOnLoad(gameObject);
     }
 }

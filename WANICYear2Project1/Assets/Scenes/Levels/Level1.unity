@@ -905,7 +905,7 @@ GameObject:
   - component: {fileID: 473631535}
   - component: {fileID: 473631534}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: HighscoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2716,7 +2716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 1e-12
+  m_ReferencePixelsPerUnit: 0
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1270, y: 720}
   m_ScreenMatchMode: 0
@@ -2865,7 +2865,7 @@ GameObject:
   - component: {fileID: 1040836827}
   - component: {fileID: 1040836826}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3101,7 +3101,7 @@ GameObject:
   - component: {fileID: 1137899610}
   - component: {fileID: 1137899609}
   m_Layer: 5
-  m_Name: Image
+  m_Name: HitEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3275,6 +3275,51 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1212750426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1212750428}
+  - component: {fileID: 1212750427}
+  m_Layer: 0
+  m_Name: ScoreKeeper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1212750427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212750426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9cd3d12a7bf7ca49a8492c55c567d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Highscore: 0
+--- !u!4 &1212750428
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212750426}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1230557809
 GameObject:
   m_ObjectHideFlags: 0
@@ -4073,7 +4118,7 @@ GameObject:
   - component: {fileID: 1423785493}
   - component: {fileID: 1423785492}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: YouDiedTextBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4207,7 +4252,7 @@ GameObject:
   - component: {fileID: 1488194250}
   - component: {fileID: 1488194249}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: SnowTexture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14578,7 +14623,7 @@ GameObject:
   - component: {fileID: 1829341240}
   - component: {fileID: 1829341239}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: YouDiedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14848,7 +14893,7 @@ GameObject:
   - component: {fileID: 1868147556}
   - component: {fileID: 1868147559}
   m_Layer: 5
-  m_Name: Restart
+  m_Name: RestartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17879,63 +17924,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &933637577722415281
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5235106086704870672, guid: 147bfbcee9bc0a447823a99780fb392c, type: 3}
-      propertyPath: m_Name
-      value: Coin
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551279335352600932, guid: 147bfbcee9bc0a447823a99780fb392c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551279335352600932, guid: 147bfbcee9bc0a447823a99780fb392c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551279335352600932, guid: 147bfbcee9bc0a447823a99780fb392c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551279335352600932, guid: 147bfbcee9bc0a447823a99780fb392c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551279335352600932, guid: 147bfbcee9bc0a447823a99780fb392c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551279335352600932, guid: 147bfbcee9bc0a447823a99780fb392c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551279335352600932, guid: 147bfbcee9bc0a447823a99780fb392c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551279335352600932, guid: 147bfbcee9bc0a447823a99780fb392c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551279335352600932, guid: 147bfbcee9bc0a447823a99780fb392c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551279335352600932, guid: 147bfbcee9bc0a447823a99780fb392c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 147bfbcee9bc0a447823a99780fb392c, type: 3}
 --- !u!1001 &8019600805411081758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18008,6 +17996,10 @@ PrefabInstance:
       propertyPath: Scoretext
       value: 
       objectReference: {fileID: 1263501165}
+    - target: {fileID: 2769745135436596887, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: DeathScoreTXT
+      value: 
+      objectReference: {fileID: 473631534}
     - target: {fileID: 2769745135436596887, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: HighScoreText
       value: 
@@ -18118,4 +18110,4 @@ SceneRoots:
   - {fileID: 182383318}
   - {fileID: 1040836829}
   - {fileID: 2120368566}
-  - {fileID: 933637577722415281}
+  - {fileID: 1212750428}
