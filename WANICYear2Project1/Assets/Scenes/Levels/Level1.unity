@@ -1125,7 +1125,7 @@ GameObject:
   - component: {fileID: 542315223}
   - component: {fileID: 542315222}
   m_Layer: 0
-  m_Name: Square
+  m_Name: GroundBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1284,7 +1284,7 @@ GameObject:
   - component: {fileID: 636640005}
   - component: {fileID: 636640004}
   m_Layer: 0
-  m_Name: Square (1)
+  m_Name: GroundBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1528,7 +1528,7 @@ GameObject:
   - component: {fileID: 689644154}
   - component: {fileID: 689644156}
   m_Layer: 0
-  m_Name: New Piskel (48)
+  m_Name: Mountain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3988,7 +3988,7 @@ GameObject:
   - component: {fileID: 1357553715}
   - component: {fileID: 1357553714}
   m_Layer: 0
-  m_Name: Square (5)
+  m_Name: GroundBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9572,7 +9572,7 @@ GameObject:
   - component: {fileID: 1679029850}
   - component: {fileID: 1679029849}
   m_Layer: 0
-  m_Name: Square (3)
+  m_Name: GroundBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9656,7 +9656,7 @@ GameObject:
   - component: {fileID: 1723602843}
   - component: {fileID: 1723602842}
   m_Layer: 0
-  m_Name: Square (2)
+  m_Name: GroundBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15121,7 +15121,7 @@ GameObject:
   - component: {fileID: 1899365138}
   - component: {fileID: 1899365137}
   m_Layer: 0
-  m_Name: Square (4)
+  m_Name: GroundBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
