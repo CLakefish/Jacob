@@ -35,10 +35,17 @@ public class PlayerHealth : Health
     protected override void OnHit()
     {
         rb.velocity = new Vector2(0, 0);
+
+        //CR: 12 should have a variable, no hard-coded values
         rb.AddForce(Vector2.up * 12, ForceMode2D.Impulse);
-        HitEffect.color = new Color(1, 0, 0, 0.4f);
         HealthBar.value = currentHealth;
         myAud.PlayOneShot(myHurtClip);
+        if (!HitEffect)
+        {
+            Debug.Log("No HitEffect assigned");
+            return;
+        }
+        HitEffect.color = new Color(1, 0, 0, 0.4f);
     }
 
 

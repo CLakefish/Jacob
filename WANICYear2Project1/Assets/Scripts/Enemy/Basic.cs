@@ -11,6 +11,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.U2D;
 
+/*
+Code review:
+comments indicate with CR.
+
+general advice: please add comments
+*/
+
 public class Basic : StateMachine
 {
     public Searching Searching;
@@ -22,6 +29,8 @@ public class Basic : StateMachine
     internal MovementController player;
     internal SpriteRenderer sprite;
     internal Animator animator;
+    [SerializeField] internal Transform glove;
+    internal SpriteRenderer gloveSprite;
 
     [Header("Movement Parameters")]
     [SerializeField] internal float moveSpeed;
@@ -29,7 +38,7 @@ public class Basic : StateMachine
     [Header("Attack Parameters")]
     [SerializeField] internal float attackSpeed;
     [SerializeField] internal int attackDamage;
-    [SerializeField] internal float attackTime, swingTime;
+    [SerializeField] internal float attackTime, chargeTime, swingTime;
 
     [Header("Collisions")]
     public LayerMask layers;
@@ -60,6 +69,8 @@ public class Basic : StateMachine
         Source = GetComponent<AudioSource>();
 
 
+        gloveSprite = glove.GetComponent<SpriteRenderer>();
+
         Searching = new(this);
         Attacking = new(this);
         Knockback = new(this);
@@ -75,7 +86,12 @@ public class Basic : StateMachine
         RaycastHit2D ground = Physics2D.BoxCast(rb.transform.position - new Vector3(0, sprite.bounds.extents.y - 0.01f, 0), new Vector2(sprite.bounds.size.x - 0.05f, 0.005f), 0, Vector2.down, 0.05f, layers);
         Grounded = ground.collider != null;
 
-        if (currentState == Searching) sprite.flipX = (player.transform.position - transform.position).x < 0;
+        bool flip = player.transform.position.x - transform.position.x < 0;
+        if (currentState == Searching)
+        {
+            sprite.flipX = flip;
+            gloveSprite.flipX = flip;
+        }
 
         base.Update();
     }
@@ -103,6 +119,7 @@ public class Searching : BaseEnemyState
         Enemy.animator.SetBool("Swinging", false);
         Enemy.animator.SetBool("Hit", false);
         Enemy.animator.SetBool("Knockback", false);
+        Enemy.glove.transform.localPosition = Vector3.zero;
     }
 
     public override void Update()
@@ -147,47 +164,75 @@ public class Searching : BaseEnemyState
 
 public class Attacking : BaseEnemyState
 {
-    private bool hasHit = false;
     public AudioSource myAud;
     public AudioClip myAudio;
+
+    float currentChargeTime;
 
     public Attacking(Basic enemy) : base(enemy) { }
     
     public override void Enter()
     {
-        Enemy.previousAttackTime = Time.time;
+        currentChargeTime = 0;
+        //instantly stops the enemy
         Enemy.rb.velocity = new Vector2(0, Enemy.rb.velocity.y);
-        hasHit = false;
     }
 
     public override void Update()
     {
-        if (Time.time >= Enemy.previousAttackTime + Enemy.attackTime)
+        currentChargeTime = Mathf.MoveTowards(currentChargeTime, Enemy.chargeTime, Time.deltaTime);
+        Enemy.glove.transform.localPosition = ((Vector2)Enemy.transform.position - (Vector2)Enemy.player.transform.position).normalized * (currentChargeTime / Enemy.chargeTime);
+
+        // rotates the glove toward the player
+        Vector3 look = Enemy.glove.transform.InverseTransformPoint(Enemy.player.transform.position);
+        float angle = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg;
+        Enemy.glove.transform.Rotate(0, 0, angle);
+
+        // makes sure the glove is never flipped over
+        Enemy.gloveSprite.flipX = false;
+        Enemy.gloveSprite.flipY = Enemy.transform.position.x > Enemy.player.transform.position.x;
+
+        if (currentChargeTime >= Enemy.chargeTime)
         {
+            Attack();
             Enemy.ChangeState(Enemy.Searching);
-            myAud.GetComponent<AudioSource>().PlayOneShot(myAudio);
-
-            return;
+            myAud.PlayOneShot(myAudio);
+            Enemy.animator.SetTrigger("Attack");
         }
+    }
 
-        if (Time.time > Enemy.previousAttackTime + Enemy.swingTime && !hasHit && Enemy.stateDuration > 0.25f)
+    void Attack()
+    {
+        currentChargeTime = 0;
+
+        Enemy.glove.rotation = Quaternion.identity;
+        Enemy.gloveSprite.flipY = false;
+
+        // CR: 2 magic numbers here
+        RaycastHit2D player = Physics2D.BoxCast(Enemy.transform.position, Vector3.one * 1.1f, 0, new Vector2(Mathf.Sign(Enemy.player.transform.position.x - Enemy.rb.transform.position.x), 0), 1.8f, Enemy.attackLayer);
+
+        if (player.collider != null && player.collider.TryGetComponent(out PlayerHealth playerHealth))
         {
-            Debug.Log("o");
-            Enemy.animator.SetBool("Swinging", true);
-            RaycastHit2D player = Physics2D.BoxCast(Enemy.transform.position, Vector3.one * 1.1f, 0, new Vector2(Mathf.Sign(Enemy.player.transform.position.x - Enemy.rb.transform.position.x), 0), 1.8f, Enemy.attackLayer);
-            if (player.collider != null)
-            {
-                Enemy.animator.SetBool("Hit", true);
-                hasHit = true;
-                player.collider.GetComponent<PlayerHealth>().Hit(Enemy.attackDamage, Enemy.transform.position);
-                player.collider.attachedRigidbody.AddForce((Enemy.player.transform.position - Enemy.transform.position).normalized * 5, ForceMode2D.Impulse);
-            }
+            playerHealth.Hit(Enemy.attackDamage, Enemy.transform.position);
+            // CR: magic number
+            player.collider.attachedRigidbody.AddForce((Enemy.player.transform.position - Enemy.transform.position).normalized * 5, ForceMode2D.Impulse);
+        }
+        Enemy.StartCoroutine(Release());
+    }
+
+    IEnumerator Release()
+    {
+        float timer = 0;
+        while (timer < Enemy.swingTime)
+        {
+            Mathf.MoveTowards(timer, Enemy.swingTime, Time.deltaTime);
+            Enemy.glove.transform.position = Vector2.Lerp(Enemy.glove.transform.position, (Enemy.player.transform.position - Enemy.transform.position).normalized, timer);
+            yield return null;
         }
     }
 
     public override void Exit()
     {
-        hasHit = false;
         Enemy.previousAttackTime = Time.time;
     }
 }

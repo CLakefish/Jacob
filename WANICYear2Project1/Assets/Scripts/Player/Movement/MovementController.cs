@@ -18,13 +18,15 @@ public class MovementController : StateMachine
     protected override State Initialize() { return Walking; }
 
     [Header("Collisions")]
-    public LayerMask layers;
+    // CR: changed "public LayerMask layers" to this, since we need to follow the convention
+    [SerializeField] private LayerMask layers;
 
     [Header("References")]
     public static MovementController Instance;
-    [SerializeField] private Camera c;
+    Camera playerCamera;
     [SerializeField] private SpriteRenderer visual;
     internal Rigidbody2D rb;
+    private Collider2D col;
     private SpriteRenderer sprite;
 
     [Header("Movement Parameters")]
@@ -72,22 +74,32 @@ public class MovementController : StateMachine
         Reload();
 
         rb = GetComponent<Rigidbody2D>();
+        col = rb.GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
+        playerCamera = FindObjectOfType<Camera>();
 
         base.Start();
     }
 
+    const float GROUNDCAST_X_IN = 0.02f;
+    const float GROUNDCAST_Y_OUT = 0.02f;
+
     new void Update()
     {
         // Improve Camera Behaviour
-        c.transform.position = Vector3.SmoothDamp(c.transform.position, new Vector3(rb.transform.position.x, rb.transform.position.y + 0.6f, -10), ref camVelocity, 0.068f);
-        c.transform.rotation = Quaternion.Slerp(c.transform.rotation, Quaternion.Euler(new Vector3(0, 0, 0)), Time.deltaTime * 4);
+
+        //CR: replace these magic numbers please
+        playerCamera.transform.position = Vector3.SmoothDamp(playerCamera.transform.position, new Vector3(rb.transform.position.x, rb.transform.position.y + 0.6f, -10), ref camVelocity, 0.068f);
+        playerCamera.transform.rotation = Quaternion.Slerp(playerCamera.transform.rotation, Quaternion.Euler(new Vector3(0, 0, 0)), Time.deltaTime * 4);
 
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        inputting = input != new Vector2(0, 0);
+        inputting = input != Vector2.zero;
 
-        RaycastHit2D ground = Physics2D.BoxCast(rb.transform.position - new Vector3(0, sprite.bounds.extents.y - 0.01f, 0), new Vector2(sprite.bounds.size.x - 0.05f, 0.005f), 0, Vector2.down, 0.05f, layers);
-        Grounded = ground.collider != null;
+        // calculate grounded
+        Vector2 overlapCenter = col.bounds.center - new Vector3(0, (col.bounds.size.y / 2) - (GROUNDCAST_Y_OUT / 2));
+        Vector2 overlapSize = new Vector2(col.bounds.size.x - GROUNDCAST_X_IN, GROUNDCAST_Y_OUT);
+        Collider2D ground = Physics2D.OverlapBox(overlapCenter, overlapSize, 0, layers);
+        Grounded = ground != null;
 
         float velocityChange = Grounded ? inputting ? groundAcceleration : groundDeceleration : inputting ? airAcceleration : airDeceleration;
         Vector2 moveDir = new Vector2(input.x * moveSpeed, rb.velocity.y);
