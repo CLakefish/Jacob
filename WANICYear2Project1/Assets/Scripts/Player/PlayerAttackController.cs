@@ -67,7 +67,7 @@ public class PlayerAttackController : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Stamina >= attackthreshold)
+        if (Input.GetMouseButtonDown(0) && Stamina >= attackthreshold && Time.timeScale != 0 /* This is here to make sure the player doesn't attack while frozen (due to pausing) */)
         {
             Attack();
         }

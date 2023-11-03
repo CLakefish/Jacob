@@ -23938,6 +23938,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 473631534}
     - target: {fileID: 2769745135436596887, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: Scoretext
+      value: 
+      objectReference: {fileID: 1982789099}
+    - target: {fileID: 2769745135436596887, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: HighScoreText
       value: 
       objectReference: {fileID: 416727734}
@@ -23966,13 +23970,21 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: WaveTXT
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
+      propertyPath: EnemyTXT
+      value: 
+      objectReference: {fileID: 1865839510}
+    - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: DifficultyText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2141310180}
     - target: {fileID: 8465877773053785588, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
       propertyPath: DifficultyText2
       value: 
@@ -23982,7 +23994,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2120368566}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8289962395605728835, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b15f5dc1d18b40744999d0aec0ea38eb, type: 3}

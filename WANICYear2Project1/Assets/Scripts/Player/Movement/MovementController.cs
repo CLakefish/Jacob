@@ -26,7 +26,7 @@ public class MovementController : StateMachine
     Camera playerCamera;
     [SerializeField] private SpriteRenderer visual;
     internal Rigidbody2D rb;
-    private Collider2D col;
+    public Collider2D col;
     private SpriteRenderer sprite;
 
     [Header("Movement Parameters")]

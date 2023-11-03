@@ -251,16 +251,27 @@ public class Knockback : BaseEnemyState
         Enemy.animator.SetBool("Knockback", true);
         enemyLayer = LayerMask.GetMask("Enemy");
         collider = Enemy.gameObject.GetComponent<Collider2D>();
+
+        // makes the enemy ignore player collision after death
+        if (collider)
+        {
+            Physics2D.IgnoreCollision(collider, Enemy.player.col);
+        }
     }
 
     public override void Update()
     {
+        /*
+        enemies no longer knock back other enemies, unused code
+        
+        
         if (Enemy.knockBackCount <= 2) return;
 
         RaycastHit2D enemy = Physics2D.BoxCast(Enemy.rb.transform.position, Vector2.one, 0, Vector2.zero, 1f, enemyLayer);
 
         if (enemy.collider != null && enemy.collider != collider && !hit.Contains(enemy.collider))
         {
+            
             Enemy.knockBackCount++;
 
             hit.Add(enemy.collider);
@@ -269,5 +280,6 @@ public class Knockback : BaseEnemyState
             enemy.collider.GetComponent<Health>().Hit(1, Enemy.transform.position);
             enemy.collider.GetComponent<SpriteRenderer>().color = Color.red;
         }
+        */
     }
 }

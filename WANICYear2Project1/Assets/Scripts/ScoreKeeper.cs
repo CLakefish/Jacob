@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScoreKeeper : MonoBehaviour
 {
 
-    public float Highscore;
+    public int Highscore;
     void Start()
     {
         ScoreKeeper scoreKeeper = FindObjectOfType<ScoreKeeper>();

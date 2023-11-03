@@ -34,8 +34,8 @@ public class Coin : MonoBehaviour
     {
         if(collision != null && collision.gameObject.GetComponent<ScoreAndTimer>())
         {
-            collision.gameObject.GetComponent<ScoreAndTimer>().CoinValue += Value;
-            collision.gameObject.GetComponent<ScoreAndTimer>().CoinTXT.text = "C: " + collision.gameObject.GetComponent<ScoreAndTimer>().CoinValue;
+            //collision.gameObject.GetComponent<ScoreAndTimer>().CoinValue += Value;
+            //collision.gameObject.GetComponent<ScoreAndTimer>().CoinTXT.text = "C: " + collision.gameObject.GetComponent<ScoreAndTimer>().CoinValue;
             GameObject Part =  Instantiate(ParticleEffect, gameObject.transform);
             Part.transform.parent = null;
             //GameObject Texs = Instantiate(TextFloat, gameObject.transform);

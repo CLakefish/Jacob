@@ -8,16 +8,13 @@ public class ScoreAndTimer : MonoBehaviour
     [Header("References")]
     [SerializeField] private TMP_Text Scoretext;
     [SerializeField] private TMP_Text HighScoreText;
-    [SerializeField] public TMP_Text CoinTXT;
 
     public static ScoreAndTimer Singleton;
-    public float currentScore { get; set; }
-    public int CoinValue;
+    ScoreKeeper scoreKeeper;
+    public int currentScore { get; set; }
 
-    public float HighScore;
     public float Multiplier;
     public float MulitplierTimer;
-    private float timer = 0;
 
     public TMP_Text DeathScoreTXT;
 
@@ -27,22 +24,20 @@ public class ScoreAndTimer : MonoBehaviour
     {
         Singleton = this;
         EnemySpawner = GetComponent<EnemySpawner>();
-        CoinValue = 0;
-        HighScore = FindObjectOfType<ScoreKeeper>().Highscore;
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
     internal void Die()
     {
-        if (currentScore > HighScore)
+        if (currentScore > scoreKeeper.Highscore && scoreKeeper)
         {
-            HighScore = currentScore;
-            FindObjectOfType<ScoreKeeper>().Highscore = HighScore;
+            scoreKeeper.Highscore = currentScore;
         }
-        DeathScoreTXT.text = "Score: " + currentScore + " HighScore: " + HighScore;
+        DeathScoreTXT.text = "Score: " + currentScore + " HighScore: " + scoreKeeper.Highscore;
         Time.timeScale = 0f;
     }
     internal void GainPoints(int points)
     {
-        currentScore += points * EnemySpawner.DifficultyRate;
+        currentScore += Mathf.FloorToInt(points * EnemySpawner.DifficultyRate);
         EnemySpawner.EnemiesKilledPerRaise++;
     }
 
@@ -51,6 +46,6 @@ public class ScoreAndTimer : MonoBehaviour
     {
         //constanty update Timer and Score
         Scoretext.text = "Score: " + currentScore;
-        HighScoreText.text = "H: " + HighScore;
+        HighScoreText.text = "H: " + (scoreKeeper ? scoreKeeper.Highscore : "0");
     }
 }
