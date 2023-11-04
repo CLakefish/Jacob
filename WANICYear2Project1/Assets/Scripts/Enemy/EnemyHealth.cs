@@ -9,10 +9,6 @@ public class EnemyHealth : Health
     public bool HitByPlayer;
     public bool died;
 
-    public GameObject Coin;
-    public int MaxCoinsPerDeath;
-    public int CoinSprayForce;
-
     public AudioSource myAud;
     public AudioClip myAudio;
     protected override void OnDeath()
@@ -49,13 +45,6 @@ public class EnemyHealth : Health
         {
             died = true;
             GetComponent<SpriteRenderer>().color = Color.white;
-
-            for (int i = 0; i < Random.Range(1, MaxCoinsPerDeath); i++)
-            {
-                GameObject CoinClone = Instantiate(Coin, gameObject.transform);
-                CoinClone.transform.parent = null;
-                CoinClone.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-10, 10), Random.Range(0, 10)) * CoinSprayForce);
-            }
 
             reference.rb.velocity = new Vector2(0, 0);
             reference.rb.AddForce(((transform.position - hitPoint).normalized + Vector3.up) * 12, ForceMode2D.Impulse);

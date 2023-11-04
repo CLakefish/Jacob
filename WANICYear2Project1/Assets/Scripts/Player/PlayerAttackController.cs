@@ -34,6 +34,7 @@ public class PlayerAttackController : MonoBehaviour
     [Tooltip("Main attack Stamina Loss")] public int MainAttackLoss;
     [Tooltip("Jump attack Stamina loss")] public int HeavyAttackLoss;
     [Tooltip("lower threshold for attacking")] public int attackthreshold;
+    public bool FreezeFrame;
     void Start()
     {
         movementController = GetComponent<MovementController>();
@@ -203,11 +204,15 @@ public class PlayerAttackController : MonoBehaviour
 
         float time = 0.1f;
 
-        Time.timeScale = 0;
+        if (FreezeFrame)
+        {
 
-        yield return new WaitForSecondsRealtime(time);
+            Time.timeScale = 0;
+            yield return new WaitForSecondsRealtime(time);
 
-        Time.timeScale = 1;
+            Time.timeScale = 1;
+
+        }
     }
 
     public void GainStamina()
